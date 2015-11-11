@@ -13,8 +13,8 @@ const methods = {
   readEvents: require('./methods/read-events'),
   refreshAccessToken: require('./methods/refresh-access-token'),
   requestAccessToken: require('./methods/request-access-token'),
-  revokeAuthorization: require('./methods/revoke-authorization')  
-}
+  revokeAuthorization: require('./methods/revoke-authorization')
+};
 
 module.exports = methods;
 
