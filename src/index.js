@@ -1,20 +1,36 @@
 'use strict';
 
+import accountInformation from './methods/account-information';
+import createEvent from './methods/create-event';
+import createNotificationChannel from './methods/create-notification-channel';
+import accountInformation from './methods/account-information';
+import createEvent from './methods/create-event';
+import createNotificationChannel from './methods/create-notification-channel';
+import deleteEvent from './methods/delete-event';
+import deleteNotificationChannel from './methods/delete-notification-channel';
+import freeBusy from './methods/free-busy';
+import listCalendars from './methods/list-calendars';
+import listNotificationChannels from './methods/list-notification-channels';
+import profileInformation from './methods/profile-information';
+import readEvents from './methods/read-events';
+import refreshAccessToken from './methods/refresh-access-token';
+import requestAccessToken from './methods/request-access-token';
+import revokeAuthorization from './methods/revoke-authorization';
+
 const methods = {
-  accountInformation: require('./methods/account-information'),
-  createEvent: require('./methods/create-event'),
-  createNotificationChannel: require('./methods/create-notification-channel'),
-  deleteEvent: require('./methods/delete-event'),
-  deleteNotificationChannel: require('./methods/delete-notification-channel'),
-  freeBusy: require('./methods/free-busy'),
-  listCalendars: require('./methods/list-calendars'),
-  listNotificationChannels: require('./methods/list-notification-channels'),
-  profileInformation: require('./methods/profile-information'),
-  readEvents: require('./methods/read-events'),
-  refreshAccessToken: require('./methods/refresh-access-token'),
-  requestAccessToken: require('./methods/request-access-token'),
-  revokeAuthorization: require('./methods/revoke-authorization')
+  accountInformation,
+  createEvent,
+  createNotificationChannel,
+  deleteEvent,
+  deleteNotificationChannel,
+  freeBusy,
+  listCalendars,
+  listNotificationChannels,
+  profileInformation,
+  readEvents,
+  refreshAccessToken,
+  requestAccessToken,
+  revokeAuthorization
 };
 
-module.exports = methods;
-
+export default methods;
