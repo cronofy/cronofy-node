@@ -8,7 +8,7 @@ import rest from '../lib/rest-client';
 
 function deleteEvent (options, callback) {
   const settings = {
-    method: 'POST',
+    method: 'DELETE',
     path: `https://api.cronofy.com/v1/calendars/${options.calendar_id}/events`,
     headers: {
       Authorization: 'Bearer ' + options.access_token
