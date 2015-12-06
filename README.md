@@ -90,7 +90,7 @@ Takes options object and an optional callback, either returning a promise for, o
 - **client_id** - Your client id.
 - **client_secret** - Your client secret.
 - **grant_type** - a string of "refresh_token".
-- **refresh_Token** - The refresh token for the user.
+- **refresh_token** - The refresh token for the user.
 
 ### requestAccessToken(options[, callback])
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object containing an access and refresh token for you to use with future requests.
