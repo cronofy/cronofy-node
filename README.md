@@ -9,7 +9,7 @@ var cronofy = require('cronofy');
 
 var options = {
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
-  client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf",
+  client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf',
   grant_type: 'authorization_code',
   code: 'asdkfj213sdf',
   redirect_uri: 'https://www.yoursite.com/calendar_redirect_page'
