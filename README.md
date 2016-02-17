@@ -55,7 +55,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **location** - An object containing a single key of 'description', whos value is a string of the event location.
 
 ### deleteEvent(options,[, callback])
-Takes options object and an optional callback, either returning a promise for, or calling the provided callback with a list of calendars for a user.
+Returns an empty string/promise for an empty string on success.
 #### Options Object
  - **calendar_id** - required - the id of the calender that the event will be deleted from.
  - **access_token** - required - The access_token.
