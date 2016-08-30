@@ -8,7 +8,7 @@ import rest from '../lib/rest-client';
 function deleteNotificationChannel (options, callback) {
   const settings = {
     method: 'DELETE',
-    path: 'https://api.cronofy.com/v1/channels/${options.channel_id}',
+    path: `https://api.cronofy.com/v1/channels/${options.channel_id}`,
     headers: {
       Authorization: 'Bearer ' + options.access_token
     }
