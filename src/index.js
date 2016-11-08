@@ -1,6 +1,7 @@
 'use strict';
 
 import accountInformation from './methods/account-information';
+import authorizeWithServiceAccount from './methods/authorize-with-service-account';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
@@ -17,6 +18,7 @@ import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
   accountInformation,
+  authorizeWithServiceAccount,
   createEvent,
   createNotificationChannel,
   deleteEvent,
