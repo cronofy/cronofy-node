@@ -4,6 +4,7 @@ import accountInformation from './methods/account-information';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
+import deleteExternalEvent from './methods/delete-external-event';
 import deleteNotificationChannel from './methods/delete-notification-channel';
 import freeBusy from './methods/free-busy';
 import listCalendars from './methods/list-calendars';
@@ -19,6 +20,7 @@ const methods = {
   createEvent,
   createNotificationChannel,
   deleteEvent,
+  deleteExternalEvent,
   deleteNotificationChannel,
   freeBusy,
   listCalendars,
