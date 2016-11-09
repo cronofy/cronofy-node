@@ -44,7 +44,7 @@ Takes options object and an optional callback, either returning a promise for, o
 ### createEvent(options[, callback])
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 #### Options Object
- - **calendar_id** - required - the id of the calender that the event will be created one.
+ - **calendar_id** - required - the id of the calendar that the event will be created one.
  - **access_token** - required - The access_token.
  - **event_id** - required - An id for the event you want to create.
  - **summary** - required - The name or title of the event.
@@ -57,7 +57,7 @@ Takes options object and an optional callback, either returning a promise for, o
 ### deleteEvent(options,[, callback])
 Returns an empty string/promise for an empty string on success.
 #### Options Object
- - **calendar_id** - required - the id of the calender that the event will be deleted from.
+ - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **access_token** - required - The access_token.
  - **event_id** - required - An id for the event you want to delete.
 
@@ -110,6 +110,13 @@ Takes options object and an optional callback, either returning a promise for, o
  - **client_id** - required - The client_id issued to you by Cronofy to authenticate your OAuth Client.
  - **client_secret** - required - The client_secret issued to you by Cronofy to authenticate your OAuth Client.
  - **token** - required - either a refresh_token or access_token for the user you need to revoke.
+
+### deleteExternalEvent(options[, callback])
+Returns an empty string/promise for an empty string on success.
+#### Options Object
+ - **calendar_id** - required - the id of the calendar that the event will be deleted from.
+ - **access_token** - required - The access_token.
+ - **event_uid** - required - An id for the external event you want to delete.
 
 ## Push Notification Methods
 ### createNotificationChannel(options,[, callback])
