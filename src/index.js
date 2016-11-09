@@ -7,6 +7,7 @@ import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
 import deleteExternalEvent from './methods/delete-external-event';
 import deleteNotificationChannel from './methods/delete-notification-channel';
+import elevatedPermissions from './methods/elevated-permissions';
 import freeBusy from './methods/free-busy';
 import listCalendars from './methods/list-calendars';
 import listNotificationChannels from './methods/list-notification-channels';
@@ -24,6 +25,7 @@ const methods = {
   deleteEvent,
   deleteExternalEvent,
   deleteNotificationChannel,
+  elevatedPermissions,
   freeBusy,
   listCalendars,
   listNotificationChannels,
