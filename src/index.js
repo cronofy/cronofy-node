@@ -1,10 +1,13 @@
 'use strict';
 
 import accountInformation from './methods/account-information';
+import authorizeWithServiceAccount from './methods/authorize-with-service-account';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
+import deleteExternalEvent from './methods/delete-external-event';
 import deleteNotificationChannel from './methods/delete-notification-channel';
+import elevatedPermissions from './methods/elevated-permissions';
 import freeBusy from './methods/free-busy';
 import listCalendars from './methods/list-calendars';
 import listNotificationChannels from './methods/list-notification-channels';
@@ -16,10 +19,13 @@ import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
   accountInformation,
+  authorizeWithServiceAccount,
   createEvent,
   createNotificationChannel,
   deleteEvent,
+  deleteExternalEvent,
   deleteNotificationChannel,
+  elevatedPermissions,
   freeBusy,
   listCalendars,
   listNotificationChannels,

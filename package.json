@@ -1,6 +1,6 @@
 {
   "name": "cronofy",
-  "version": "1.1.10",
+  "version": "1.1.11",
   "description": "A simple wrapper for the cronofy api",
   "main": "./build/index.js",
   "scripts": {
