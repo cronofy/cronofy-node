@@ -118,6 +118,20 @@ Returns an empty string/promise for an empty string on success.
  - **access_token** - required - The access_token.
  - **event_uid** - required - An id for the external event you want to delete.
 
+### elevatedPermissions(options[, callback])
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object containing a permissions URL with a token
+#### Options Object
+ - **permissions** - required - An array of objects with a calendar_id and permission_level
+ - **access_token** - required - The access_token.
+ - **redirect_uri** - required - Url to redirect the user to in order to grant or reject requested access
+
+### authorizeWithServiceAccount(options[, callback])
+#### Options Object
+ - **access_token** - required - The Service Account access_token
+ - **email** - required - The email of the user to be authorized
+ - **scope** - required - The scopes to authorize for the user
+ - **callback_url** - required - The URL to return to after the authorization
+
 ## Push Notification Methods
 ### createNotificationChannel(options,[, callback])
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object with the new channel details.
