@@ -112,7 +112,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **token** - required - either a refresh_token or access_token for the user you need to revoke.
 
 ### deleteExternalEvent(options[, callback])
-Returns an empty string/promise for an empty string on success.
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 #### Options Object
  - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **access_token** - required - The access_token.
@@ -126,6 +126,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **redirect_uri** - required - Url to redirect the user to in order to grant or reject requested access
 
 ### authorizeWithServiceAccount(options[, callback])
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 #### Options Object
  - **access_token** - required - The Service Account access_token
  - **email** - required - The email of the user to be authorized
