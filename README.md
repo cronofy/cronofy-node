@@ -44,7 +44,7 @@ Takes options object and an optional callback, either returning a promise for, o
 ### createEvent(options[, callback])
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 #### Options Object
- - **calendar_id** - required - the id of the calender that the event will be created one.
+ - **calendar_id** - required - the id of the calendar that the event will be created one.
  - **access_token** - required - The access_token.
  - **event_id** - required - An id for the event you want to create.
  - **summary** - required - The name or title of the event.
@@ -57,7 +57,7 @@ Takes options object and an optional callback, either returning a promise for, o
 ### deleteEvent(options,[, callback])
 Returns an empty string/promise for an empty string on success.
 #### Options Object
- - **calendar_id** - required - the id of the calender that the event will be deleted from.
+ - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **access_token** - required - The access_token.
  - **event_id** - required - An id for the event you want to delete.
 
@@ -110,6 +110,28 @@ Takes options object and an optional callback, either returning a promise for, o
  - **client_id** - required - The client_id issued to you by Cronofy to authenticate your OAuth Client.
  - **client_secret** - required - The client_secret issued to you by Cronofy to authenticate your OAuth Client.
  - **token** - required - either a refresh_token or access_token for the user you need to revoke.
+
+### deleteExternalEvent(options[, callback])
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
+#### Options Object
+ - **calendar_id** - required - the id of the calendar that the event will be deleted from.
+ - **access_token** - required - The access_token.
+ - **event_uid** - required - An id for the external event you want to delete.
+
+### elevatedPermissions(options[, callback])
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object containing a permissions URL with a token
+#### Options Object
+ - **permissions** - required - An array of objects with a calendar_id and permission_level
+ - **access_token** - required - The access_token.
+ - **redirect_uri** - required - Url to redirect the user to in order to grant or reject requested access
+
+### authorizeWithServiceAccount(options[, callback])
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
+#### Options Object
+ - **access_token** - required - The Service Account access_token
+ - **email** - required - The email of the user to be authorized
+ - **scope** - required - The scopes to authorize for the user
+ - **callback_url** - required - The URL to return to after the authorization
 
 ## Push Notification Methods
 ### createNotificationChannel(options,[, callback])
