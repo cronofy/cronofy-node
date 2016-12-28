@@ -13,7 +13,7 @@ function createEvent (options, callback) {
     headers: {
       Authorization: 'Bearer ' + options.access_token
     },
-    params: _.omit(options, ['access_token', 'calendar_id'])
+    entity: _.omit(options, ['access_token', 'calendar_id'])
   };
   const result = rest(settings).fold(reach, 'entity');
 

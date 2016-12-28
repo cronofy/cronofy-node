@@ -13,7 +13,7 @@ function createNotificationChannel (options, callback) {
     headers: {
       Authorization: 'Bearer ' + options.access_token
     },
-    params: _.omit(options, 'access_token')
+    entity: _.omit(options, 'access_token')
   };
   const result = rest(settings).fold(reach, 'entity');
 

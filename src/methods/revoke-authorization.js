@@ -10,6 +10,7 @@ function revokeAuthorization (options, callback) {
     path: 'https://api.cronofy.com/oauth/token/revoke',
     entity: options
   };
+
   const result = rest(settings).fold(reach, 'entity');
 
   return nodefn.bindCallback(result, callback);

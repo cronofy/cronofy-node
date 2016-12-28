@@ -1,7 +1,7 @@
 {
   "name": "cronofy",
-  "version": "1.1.11",
-  "description": "A simple wrapper for the cronofy api",
+  "version": "1.2.0",
+  "description": "A simple wrapper for the Cronofy API",
   "main": "./build/index.js",
   "scripts": {
     "prebuild": "rm -rf build && mkdir build",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/warbrett/node-cronofy.git"
+    "url": "git+https://github.com/cronofy/cronofy-node.git"
   },
   "keywords": [
     "cronofy",
@@ -21,9 +21,9 @@
   "author": "Brett Warner <brett@warbrett.com> (www.warbrett.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/warbrett/node-cronofy/issues"
+    "url": "https://github.com/cronofy/cronofy-node/issues"
   },
-  "homepage": "https://github.com/warbrett/node-cronofy#readme",
+  "homepage": "https://github.com/cronofy/cronofy-node#readme",
   "dependencies": {
     "lodash": "^3.10.1",
     "origami": "^0.3.0",
