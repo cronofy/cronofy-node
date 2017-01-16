@@ -16,6 +16,7 @@ import readEvents from './methods/read-events';
 import refreshAccessToken from './methods/refresh-access-token';
 import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
+import availability from './methods/availability.js';
 
 const methods = {
   accountInformation,
@@ -33,7 +34,8 @@ const methods = {
   readEvents,
   refreshAccessToken,
   requestAccessToken,
-  revokeAuthorization
+  revokeAuthorization,
+  availability
 };
 
 export default methods;
