@@ -8,7 +8,7 @@ import rest from '../lib/rest-client';
 
 function availability (options, callback) {
   const settings = {
-    method: 'GET',
+    method: 'POST',
     path: 'https://api.cronofy.com/v1/availability',
     headers: {
       Authorization: 'Bearer ' + options.access_token
