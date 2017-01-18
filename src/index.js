@@ -21,7 +21,7 @@ import revokeAuthorization from './methods/revoke-authorization';
 const methods = {
   accountInformation,
   authorizeWithServiceAccount,
-  availability
+  availability,
   createEvent,
   createNotificationChannel,
   deleteEvent,
@@ -35,7 +35,7 @@ const methods = {
   readEvents,
   refreshAccessToken,
   requestAccessToken,
-  revokeAuthorization,
+  revokeAuthorization
 };
 
 export default methods;

@@ -12,7 +12,7 @@ function availability (options, callback) {
     path: 'https://api.cronofy.com/v1/availability',
     headers: {
       Authorization: 'Bearer ' + options.access_token,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     entity: _.omit(options, ['access_token'])
   };
