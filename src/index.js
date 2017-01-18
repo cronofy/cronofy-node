@@ -2,6 +2,7 @@
 
 import accountInformation from './methods/account-information';
 import authorizeWithServiceAccount from './methods/authorize-with-service-account';
+import availability from './methods/availability.js';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
@@ -16,11 +17,11 @@ import readEvents from './methods/read-events';
 import refreshAccessToken from './methods/refresh-access-token';
 import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
-import availability from './methods/availability.js';
 
 const methods = {
   accountInformation,
   authorizeWithServiceAccount,
+  availability
   createEvent,
   createNotificationChannel,
   deleteEvent,
@@ -35,7 +36,6 @@ const methods = {
   refreshAccessToken,
   requestAccessToken,
   revokeAuthorization,
-  availability
 };
 
 export default methods;
