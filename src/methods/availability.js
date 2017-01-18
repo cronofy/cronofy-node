@@ -11,7 +11,8 @@ function availability (options, callback) {
     method: 'POST',
     path: 'https://api.cronofy.com/v1/availability',
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + options.access_token,
+      'Content-Type': 'application/json',
     },
     params: _.omit(options, 'access_token')
   };
