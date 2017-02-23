@@ -8,7 +8,7 @@ import rest from '../lib/rest-client';
 function accountInformation (options, callback) {
   const settings = {
     method: 'GET',
-    path: 'https://api.cronofy.com/v1/account',
+    path: options.urls.api + '/v1/account',
     headers: {
       Authorization: 'Bearer ' + options.access_token
     }

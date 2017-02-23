@@ -9,7 +9,7 @@ import rest from '../lib/rest-client';
 function freeBusy (options, callback) {
   const settings = {
     method: 'GET',
-    path: 'https://api.cronofy.com/v1/free_busy',
+    path: options.urls.api + '/v1/free_busy',
     headers: {
       Authorization: 'Bearer ' + options.access_token
     },

@@ -9,7 +9,7 @@ import rest from '../lib/rest-client';
 function readEvents (options, callback) {
   const settings = {
     method: 'GET',
-    path: options.next_page || 'https://api.cronofy.com/v1/events',
+    path: options.next_page || options.urls.api + '/v1/events',
     headers: {
       Authorization: 'Bearer ' + options.access_token
     },
