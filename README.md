@@ -208,3 +208,7 @@ Takes options object and an optional callback, either returning a promise for, o
 #### Options Object
 
 - **access_token** - required - The access_token.
+
+### setDataCenter(dataCenter)
+
+Takes dataCenter string to specify which data center for the Cronofy instance to target.
