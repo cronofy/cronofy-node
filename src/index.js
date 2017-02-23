@@ -42,13 +42,11 @@ var urls = function(dataCenter){
   if(dataCenter){
     return {
       api: 'https://api-' + dataCenter + '.cronofy.com',
-      app: 'https://app-' + dataCenter + '.cronofy.com'
     };
   }
 
   return {
     api: 'https://api.cronofy.com',
-    app: 'https://app.cronofy.com'
   };
 }
 
