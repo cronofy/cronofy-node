@@ -12,7 +12,7 @@ function elevatedPermissions (options, callback) {
     path: options.urls.api + '/v1/permissions',
     headers: {
       Authorization: 'Bearer ' + options.access_token,
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     entity: _.omit(options, ['access_token'])
   };
