@@ -7,7 +7,7 @@ import rest from '../lib/rest-client';
 function revokeAuthorization (options, callback) {
   const settings = {
     method: 'POST',
-    path: 'https://api.cronofy.com/oauth/token/revoke',
+    path: options.urls.api + '/oauth/token/revoke',
     entity: options
   };
 

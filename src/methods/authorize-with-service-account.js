@@ -9,7 +9,7 @@ import rest from '../lib/rest-client';
 function authorizeWithServiceAccount (options, callback) {
   const settings = {
     method: 'POST',
-    path: `https://api.cronofy.com/v1/service_account_authorizations/`,
+    path: options.urls.api + `/v1/service_account_authorizations/`,
     headers: {
       Authorization: 'Bearer ' + options.access_token
     },

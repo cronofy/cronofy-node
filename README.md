@@ -9,7 +9,7 @@ The APIs should be one to one with the all of the current methods in [Cronofy's 
 #### Usage Example
 
 ```node
-var cronofy = require('cronofy');
+var cronofy = require('cronofy')();
 
 var options = {
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
@@ -208,3 +208,7 @@ Takes options object and an optional callback, either returning a promise for, o
 #### Options Object
 
 - **access_token** - required - The access_token.
+
+### setDataCenter(dataCenter)
+
+Takes dataCenter string to specify which data center for the Cronofy instance to target.

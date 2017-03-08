@@ -7,7 +7,7 @@ import rest from '../lib/rest-client';
 function refreshAccessToken (options, callback) {
   const settings = {
     method: 'POST',
-    path: 'https://api.cronofy.com/oauth/token',
+    path: options.urls.api + '/oauth/token',
     entity: options
   };
   const result = rest(settings).fold(reach, 'entity');
