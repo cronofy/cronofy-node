@@ -6,14 +6,14 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function readEvents (options, callback) {
+function readEvents (config, options, callback) {
   const settings = {
     method: 'GET',
-    path: options.next_page || options.urls.api + '/v1/events',
+    path: options.next_page || config.urls.api + '/v1/events',
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     },
-    params: _.omit(options, 'access_token', 'next_page')
+    params: _.omit(options, 'next_page')
   };
   const result = rest(settings).fold(reach, 'entity');
 

@@ -50,19 +50,25 @@ var urls = function (dataCenter) {
   };
 };
 
-var cronofy = function () {
+var cronofy = function (clientId, clientSecret, accessToken, refreshToken) {
   var _cronofy = {};
-  var _urls = urls();
+  var _config = {
+    urls: urls(),
+
+    client_id: clientId,
+    client_secret: clientSecret,
+
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  };
 
   _cronofy.setDataCenter = function (dataCenter) {
-    _urls = urls(dataCenter);
+    _config.urls = urls(dataCenter);
   };
 
   var setupMethod = function (methodName) {
     _cronofy[methodName] = function (options, callback) {
-      options.urls = _urls;
-
-      return methods[methodName](options, callback);
+      return methods[methodName](_config, options, callback);
     };
   };
 
