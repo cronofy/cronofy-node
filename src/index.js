@@ -67,9 +67,20 @@ var cronofy = function (clientId, clientSecret, accessToken, refreshToken) {
   };
 
   var setupMethod = function (methodName) {
-    _cronofy[methodName] = function (options, callback) {
-      return methods[methodName](_config, options, callback);
-    };
+    if(methodName == "requestAccessToken" || methodName == "refreshAccessToken"){
+      _cronofy[methodName] = function (options, callback) {
+        return methods[methodName](_config, options, callback).then(function(response){
+          _config.access_token = response.access_token;
+          _config.refresh_token = response.refresh_token;
+
+          return response;
+        });
+      }
+    } else {
+      _cronofy[methodName] = function (options, callback) {
+        return methods[methodName](_config, options, callback);
+      };
+    }
   };
 
   for (var method in methods) {
