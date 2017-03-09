@@ -5,10 +5,12 @@ import { reach } from 'origami';
 import rest from '../lib/rest-client';
 
 function requestAccessToken (config, options, callback) {
-  options.refresh_token = config.refreshToken;
-  
-  options.client_id = config.clientId;
-  options.client_secret = config.clientSecret;
+  options = options || {};
+
+  options.grant_type = options.grant_type || 'authorization_code';
+
+  options.client_id = options.client_id || config.client_id;
+  options.client_secret = options.client_secret || config.client_secret;
 
   const settings = {
     method: 'POST',
