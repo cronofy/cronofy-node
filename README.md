@@ -9,7 +9,7 @@ The APIs should be one to one with the all of the current methods in [Cronofy's 
 #### Usage Example
 
 ```node
-var cronofy = require('cronofy')();
+var cronofy = require('cronofy')(clientId, clientSecret, accessToken, refreshToken);
 
 var options = {
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
