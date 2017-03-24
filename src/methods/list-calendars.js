@@ -4,7 +4,7 @@ import nodefn from 'when/node';
 import { reach } from 'origami';
 import rest from '../lib/rest-client';
 
-function listCalendars (config, options, callback) {
+function listCalendars (config, callback) {
   const settings = {
     method: 'GET',
     path: config.urls.api + '/v1/calendars',

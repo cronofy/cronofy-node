@@ -5,7 +5,7 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function profileInformation (config, options, callback) {
+function profileInformation (config, callback) {
   const settings = {
     method: 'GET',
     path: config.urls.api + '/v1/profiles',

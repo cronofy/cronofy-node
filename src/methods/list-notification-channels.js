@@ -5,7 +5,7 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function listNotificationChannel (config, options, callback) {
+function listNotificationChannel (config, callback) {
   const settings = {
     method: 'GET',
     path: config.urls.api + '/v1/channels',
