@@ -1,6 +1,7 @@
 'use strict';
 
 import accountInformation from './methods/account-information';
+import addToCalendar from './methods/add-to-calendar';
 import authorizeWithServiceAccount from './methods/authorize-with-service-account';
 import availability from './methods/availability.js';
 import createEvent from './methods/create-event';
@@ -20,6 +21,7 @@ import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
   accountInformation,
+  addToCalendar,
   authorizeWithServiceAccount,
   availability,
   createEvent,
