@@ -6,14 +6,14 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function freeBusy (options, callback) {
+function freeBusy (config, options, callback) {
   const settings = {
     method: 'GET',
-    path: options.urls.api + '/v1/free_busy',
+    path: config.urls.api + '/v1/free_busy',
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     },
-    params: _.omit(options, 'access_token')
+    params: options
   };
   const result = rest(settings).fold(reach, 'entity');
 

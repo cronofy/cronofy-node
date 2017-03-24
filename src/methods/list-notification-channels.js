@@ -5,12 +5,12 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function listNotificationChannel (options, callback) {
+function listNotificationChannel (config, callback) {
   const settings = {
     method: 'GET',
-    path: options.urls.api + '/v1/channels',
+    path: config.urls.api + '/v1/channels',
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     }
   };
   const result = rest(settings).fold(reach, 'entity');

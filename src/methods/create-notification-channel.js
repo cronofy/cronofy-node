@@ -6,14 +6,14 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function createNotificationChannel (options, callback) {
+function createNotificationChannel (config, options, callback) {
   const settings = {
     method: 'POST',
-    path: options.urls.api + '/v1/channels',
+    path: config.urls.api + '/v1/channels',
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     },
-    entity: _.omit(options, 'access_token')
+    entity: options
   };
   const result = rest(settings).fold(reach, 'entity');
 

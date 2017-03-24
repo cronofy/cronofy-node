@@ -6,14 +6,14 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function createEvent (options, callback) {
+function createEvent (config, options, callback) {
   const settings = {
     method: 'POST',
-    path: options.urls.api + `/v1/calendars/${options.calendar_id}/events`,
+    path: config.urls.api + `/v1/calendars/${options.calendar_id}/events`,
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     },
-    entity: _.omit(options, ['access_token', 'calendar_id'])
+    entity: _.omit(options, ['calendar_id'])
   };
   const result = rest(settings).fold(reach, 'entity');
 

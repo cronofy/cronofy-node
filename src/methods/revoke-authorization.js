@@ -4,10 +4,15 @@ import nodefn from 'when/node';
 import { reach } from 'origami';
 import rest from '../lib/rest-client';
 
-function revokeAuthorization (options, callback) {
+function revokeAuthorization (config, options, callback) {
+  options = options || {};
+
+  options.client_id = options.client_id || config.client_id;
+  options.client_secret = options.client_secret || config.client_secret;
+
   const settings = {
     method: 'POST',
-    path: options.urls.api + '/oauth/token/revoke',
+    path: config.urls.api + '/oauth/token/revoke',
     entity: options
   };
 

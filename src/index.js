@@ -50,20 +50,27 @@ var urls = function (dataCenter) {
   };
 };
 
-var cronofy = function () {
+var cronofy = function (config) {
   var _cronofy = {};
-  var _urls = urls();
 
-  _cronofy.setDataCenter = function (dataCenter) {
-    _urls = urls(dataCenter);
-  };
+  config = config || {};
+  config.urls = urls(config.dataCenter);
 
   var setupMethod = function (methodName) {
-    _cronofy[methodName] = function (options, callback) {
-      options.urls = _urls;
+    if(methodName == "requestAccessToken" || methodName == "refreshAccessToken"){
+      _cronofy[methodName] = function (options, callback) {
+        return methods[methodName](config, options, callback).then(function(response){
+          config.access_token = response.access_token;
+          config.refresh_token = response.refresh_token;
 
-      return methods[methodName](options, callback);
-    };
+          return response;
+        });
+      }
+    } else {
+      _cronofy[methodName] = function (options, callback) {
+        return methods[methodName](config, options, callback);
+      };
+    }
   };
 
   for (var method in methods) {

@@ -6,14 +6,14 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function authorizeWithServiceAccount (options, callback) {
+function authorizeWithServiceAccount (config, options, callback) {
   const settings = {
     method: 'POST',
-    path: options.urls.api + `/v1/service_account_authorizations/`,
+    path: config.urls.api + `/v1/service_account_authorizations/`,
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     },
-    entity: _.omit(options, ['access_token'])
+    entity: options
   };
   const result = rest(settings).fold(reach, 'entity');
 

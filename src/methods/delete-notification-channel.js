@@ -5,12 +5,12 @@ import { reach } from 'origami';
 
 import rest from '../lib/rest-client';
 
-function deleteNotificationChannel (options, callback) {
+function deleteNotificationChannel (config, options, callback) {
   const settings = {
     method: 'DELETE',
-    path: options.urls.api + `/v1/channels/${options.channel_id}`,
+    path: config.urls.api + `/v1/channels/${options.channel_id}`,
     headers: {
-      Authorization: 'Bearer ' + options.access_token
+      Authorization: 'Bearer ' + config.access_token
     }
   };
   const result = rest(settings).fold(reach, 'entity');
