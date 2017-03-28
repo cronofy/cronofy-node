@@ -4,7 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import deleteEvent from './methods/delete-event';
 import deleteExternalEvent from './methods/delete-external-event';
 import deleteNotificationChannel from './methods/delete-notification-channel';
 import elevatedPermissions from './methods/elevated-permissions';
@@ -18,7 +17,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  deleteEvent,
   deleteExternalEvent,
   deleteNotificationChannel,
   elevatedPermissions,
@@ -64,6 +62,12 @@ var cronofy = function(config){
     httpPost('/v1/channels', details.options, details.callback);
   }
 
+  this.deleteEvent = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback);
+  }
+
   var urls = {
     api: 'http://local' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
   };
@@ -77,9 +81,7 @@ var cronofy = function(config){
       },
     };
 
-    rest(settings).then(function(result){
-      callback(result['entity']);
-    });
+    httpCall(settings, callback);
   }
 
   var httpPost = function(path, options, callback, optionsToOmit){
@@ -93,6 +95,24 @@ var cronofy = function(config){
       entity: _.omit(options, optionsToOmit || ['access_token'])
     };
 
+    httpCall(settings, callback);
+  }
+
+  var httpDelete = function(path, options, callback, optionsToOmit){
+    var settings = {
+      method: 'DELETE',
+      path: urls.api + path,
+      headers: {
+        Authorization: 'Bearer ' + options.access_token,
+        'Content-Type': 'application/json'
+      },
+      entity: _.omit(options, optionsToOmit || ['access_token'])
+    };
+
+    httpCall(settings, callback);
+  }
+
+  var httpCall = function(settings, callback){
     rest(settings).then(function(result){
       if(result['entity']) {
         callback(result['entity']);
