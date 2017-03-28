@@ -4,7 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import availability from './methods/availability.js';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
 import deleteEvent from './methods/delete-event';
@@ -21,7 +20,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  availability,
   createEvent,
   createNotificationChannel,
   deleteEvent,
@@ -50,6 +48,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpPost('/v1/service_account_authorizations', details.options, details.callback);
+  }
+
+  this.availability = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpPost('/v1/availability', details.options, details.callback);
   }
 
   var urls = {
