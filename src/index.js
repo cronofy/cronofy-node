@@ -4,7 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import authorizeWithServiceAccount from './methods/authorize-with-service-account';
 import availability from './methods/availability.js';
 import createEvent from './methods/create-event';
 import createNotificationChannel from './methods/create-notification-channel';
@@ -22,7 +21,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  authorizeWithServiceAccount,
   availability,
   createEvent,
   createNotificationChannel,
@@ -60,6 +58,27 @@ var cronofy = function(config){
     });
   }
 
+  var httpPost = function(path, options, callback, optionsToOmit){
+    var settings = {
+      method: 'POST',
+      path: urls.api + path,
+      headers: {
+        Authorization: 'Bearer ' + options.access_token
+      },
+      entity: _.omit(options, optionsToOmit || ['access_token'])
+    };
+
+    rest(settings).then(function(result){
+      if(result['entity']) {
+        callback(result['entity']);
+      } else {
+        callback();
+      }
+    }, function(){
+      console.log("Error", arguments[0]['status']['code'], arguments[0]['entity']);
+    });
+  }
+
   var parseArguments = function(args, configDefaults){
     var parsed = {
       options: args.length == 2 ? args[0] : {},
@@ -79,6 +98,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
     
     httpGet('/v1/account', details.options, details.callback);
+  }
+
+  this.authorizeWithServiceAccount = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpPost('/v1/service_account_authorizations', details.options, details.callback);
   }
 }
 
