@@ -85,34 +85,20 @@ var cronofy = function(config){
   };
 
   var httpGet = function(path, options, callback, optionsToOmit){
-    var settings = {
-      method: 'GET',
-      path: urls.api + path,
-      headers: {
-        Authorization: 'Bearer ' + options.access_token
-      },
-    };
-
-    httpCall(settings, callback);
+    httpCall('GET', path, options, callback, optionsToOmit);
   }
 
   var httpPost = function(path, options, callback, optionsToOmit){
-    var settings = {
-      method: 'POST',
-      path: urls.api + path,
-      headers: {
-        Authorization: 'Bearer ' + options.access_token,
-        'Content-Type': 'application/json'
-      },
-      entity: _.omit(options, optionsToOmit || ['access_token'])
-    };
-
-    httpCall(settings, callback);
+    httpCall('POST', path, options, callback, optionsToOmit);
   }
 
   var httpDelete = function(path, options, callback, optionsToOmit){
+    httpCall('DELETE', path, options, callback, optionsToOmit);
+  }
+
+  var httpCall = function(method, path, options, callback, optionsToOmit){
     var settings = {
-      method: 'DELETE',
+      method: method,
       path: urls.api + path,
       headers: {
         Authorization: 'Bearer ' + options.access_token,
@@ -121,10 +107,6 @@ var cronofy = function(config){
       entity: _.omit(options, optionsToOmit || ['access_token'])
     };
 
-    httpCall(settings, callback);
-  }
-
-  var httpCall = function(settings, callback){
     rest(settings).then(function(result){
       if(result['entity']) {
         callback(result['entity']);
