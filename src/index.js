@@ -63,13 +63,19 @@ var cronofy = function(config){
   this.deleteEvent = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
-    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback);
+    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
   }
 
   this.deleteExternalEvent = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
-    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback);
+    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
+  }
+
+  this.deleteNotificationChannel = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpDelete('/v1/channels/' + details.options.channel_id, )
   }
 
   var urls = {
