@@ -4,7 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import deleteExternalEvent from './methods/delete-external-event';
 import deleteNotificationChannel from './methods/delete-notification-channel';
 import elevatedPermissions from './methods/elevated-permissions';
 import freeBusy from './methods/free-busy';
@@ -17,7 +16,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  deleteExternalEvent,
   deleteNotificationChannel,
   elevatedPermissions,
   freeBusy,
@@ -63,6 +61,12 @@ var cronofy = function(config){
   }
 
   this.deleteEvent = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback);
+  }
+
+  this.deleteExternalEvent = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback);
