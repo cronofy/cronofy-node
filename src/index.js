@@ -88,6 +88,12 @@ var cronofy = function(config){
     httpGet('/v1/calendars', details.options, details.callback);
   }
 
+  this.listNotificationChannels = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpGet('/v1/channels', details.options, details.callback);
+  }
+
   var urls = {
     api: 'http://local' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
   };
