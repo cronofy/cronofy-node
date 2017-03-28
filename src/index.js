@@ -4,13 +4,11 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import readEvents from './methods/read-events';
 import refreshAccessToken from './methods/refresh-access-token';
 import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  readEvents,
   refreshAccessToken,
   requestAccessToken,
   revokeAuthorization
@@ -94,6 +92,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpGet('/v1/profiles', details.options, details.callback);
+  }
+
+  this.readEvents = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpGet('/v1/events', details.options, details.callback);
   }
 
   var urls = {
