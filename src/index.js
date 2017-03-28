@@ -4,8 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import deleteNotificationChannel from './methods/delete-notification-channel';
-import elevatedPermissions from './methods/elevated-permissions';
 import freeBusy from './methods/free-busy';
 import listCalendars from './methods/list-calendars';
 import listNotificationChannels from './methods/list-notification-channels';
@@ -16,8 +14,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  deleteNotificationChannel,
-  elevatedPermissions,
   freeBusy,
   listCalendars,
   listNotificationChannels,
@@ -76,6 +72,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpDelete('/v1/channels/' + details.options.channel_id, details.options, details.callback, ['access_token', 'channel_id']);
+  }
+
+  this.elevatedPermissions = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpPost('/v1/permissions', details.options, details.callback);
   }
 
   var urls = {
