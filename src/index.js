@@ -4,12 +4,10 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import refreshAccessToken from './methods/refresh-access-token';
 import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  refreshAccessToken,
   requestAccessToken,
   revokeAuthorization
 };
@@ -98,6 +96,19 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpGet('/v1/events', details.options, details.callback);
+  }
+
+  this.refreshAccessToken = function(){
+    var details = parseArguments(arguments, ["client_id", "client_secret", "refresh_token"]);
+
+    details.options.grant_type = "refresh_token";
+
+    httpPost('/oauth/token', details.options, function(token){
+      config.access_token = token.access_token;
+      config.refresh_token = token.refresh_token;
+
+      details.callback(token);
+    });
   }
 
   var urls = {
