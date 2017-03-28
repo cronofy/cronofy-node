@@ -75,7 +75,7 @@ var cronofy = function(config){
   this.deleteNotificationChannel = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
-    httpDelete('/v1/channels/' + details.options.channel_id, )
+    httpDelete('/v1/channels/' + details.options.channel_id, details.options, details.callback, ['access_token', 'channel_id']);
   }
 
   var urls = {
