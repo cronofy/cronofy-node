@@ -4,7 +4,6 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import freeBusy from './methods/free-busy';
 import listCalendars from './methods/list-calendars';
 import listNotificationChannels from './methods/list-notification-channels';
 import profileInformation from './methods/profile-information';
@@ -14,7 +13,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  freeBusy,
   listCalendars,
   listNotificationChannels,
   profileInformation,
@@ -78,6 +76,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpPost('/v1/permissions', details.options, details.callback);
+  }
+
+  this.freeBusy = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpGet('/v1/free_busy', details.options, details.callback);
   }
 
   var urls = {
