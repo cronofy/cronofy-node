@@ -1,6 +1,9 @@
 'use strict';
 
-import accountInformation from './methods/account-information';
+import _ from 'lodash';
+import rest from './lib/rest-client';
+
+/*
 import authorizeWithServiceAccount from './methods/authorize-with-service-account';
 import availability from './methods/availability.js';
 import createEvent from './methods/create-event';
@@ -19,7 +22,6 @@ import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  accountInformation,
   authorizeWithServiceAccount,
   availability,
   createEvent,
@@ -37,40 +39,47 @@ const methods = {
   requestAccessToken,
   revokeAuthorization
 };
+};*/
 
-var urls = function (dataCenter) {
-  if (dataCenter) {
-    return {
-      api: 'https://api-' + dataCenter + '.cronofy.com'
+var cronofy = function(config){
+  var urls = {
+    api: 'http://local' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
+  };
+
+  var httpGet = function(path, options, callback){
+    var settings = {
+      method: 'GET',
+      path: urls.api + path,
+      headers: {
+        Authorization: 'Bearer ' + options.access_token
+      }
     };
+
+    rest(settings).then(function(result){
+      callback(result['entity']);
+    });
   }
 
-  return {
-    api: 'https://api.cronofy.com'
-  };
-};
-
-var cronofy = function () {
-  var _cronofy = {};
-  var _urls = urls();
-
-  _cronofy.setDataCenter = function (dataCenter) {
-    _urls = urls(dataCenter);
-  };
-
-  var setupMethod = function (methodName) {
-    _cronofy[methodName] = function (options, callback) {
-      options.urls = _urls;
-
-      return methods[methodName](options, callback);
+  var parseArguments = function(args, configDefaults){
+    var parsed = {
+      options: args.length == 2 ? args[0] : {},
+      callback: args.length == 2 ? args[1] : args[0]
     };
-  };
 
-  for (var method in methods) {
-    setupMethod(method);
+    for(var i = 0; i < configDefaults.length; i++){
+      var key = configDefaults[i];
+
+      parsed.options[key] = parsed.options[key] || config[key];
+    }
+
+    return parsed;
   }
 
-  return _cronofy;
-};
+  this.accountInformation = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+    
+    httpGet('/v1/account', details.options, details.callback);
+  }
+}
 
 export default cronofy;
