@@ -4,11 +4,9 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  requestAccessToken,
   revokeAuthorization
 };
 };*/
@@ -109,6 +107,19 @@ var cronofy = function(config){
 
       details.callback(token);
     });
+  }
+
+  this.requestAccessToken = function(){
+    var details = parseArguments(arguments, ["client_id", "client_secret", "refresh_token"]);
+
+    details.options.grant_type = "authorization_code";
+
+    httpPost('/oauth/token', details.options, function(token){
+      config.access_token = token.access_token;
+      config.refresh_token = token.refresh_token;
+
+      details.callback(token);
+    })
   }
 
   var urls = {
