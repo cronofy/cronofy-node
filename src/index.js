@@ -3,14 +3,6 @@
 import _ from 'lodash';
 import rest from './lib/rest-client';
 
-/*
-import revokeAuthorization from './methods/revoke-authorization';
-
-const methods = {
-  revokeAuthorization
-};
-};*/
-
 var cronofy = function(config){
   this.accountInformation = function(){
     var details = parseArguments(arguments, ["access_token"]);
@@ -119,6 +111,19 @@ var cronofy = function(config){
       config.refresh_token = token.refresh_token;
 
       details.callback(token);
+    })
+  }
+
+  this.revokeAuthorization = function(){
+    var details = parseArguments(arguments, ["client_id", "client_secret", "refresh_token"]);
+
+    httpPost('/oauth/token/revoke', details.options, function(){
+      delete config.access_token;
+      delete config.refresh_token;
+
+      console.log(config);
+
+      details.callback();
     })
   }
 
