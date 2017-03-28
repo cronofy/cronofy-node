@@ -40,17 +40,29 @@ const methods = {
 };*/
 
 var cronofy = function(config){
+  this.accountInformation = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpGet('/v1/account', details.options, details.callback);
+  }
+
+  this.authorizeWithServiceAccount = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpPost('/v1/service_account_authorizations', details.options, details.callback);
+  }
+
   var urls = {
     api: 'http://local' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
   };
 
-  var httpGet = function(path, options, callback){
+  var httpGet = function(path, options, callback, optionsToOmit){
     var settings = {
       method: 'GET',
       path: urls.api + path,
       headers: {
         Authorization: 'Bearer ' + options.access_token
-      }
+      },
     };
 
     rest(settings).then(function(result){
@@ -63,7 +75,8 @@ var cronofy = function(config){
       method: 'POST',
       path: urls.api + path,
       headers: {
-        Authorization: 'Bearer ' + options.access_token
+        Authorization: 'Bearer ' + options.access_token,
+        'Content-Type': 'application/json'
       },
       entity: _.omit(options, optionsToOmit || ['access_token'])
     };
@@ -92,18 +105,6 @@ var cronofy = function(config){
     }
 
     return parsed;
-  }
-
-  this.accountInformation = function(){
-    var details = parseArguments(arguments, ["access_token"]);
-    
-    httpGet('/v1/account', details.options, details.callback);
-  }
-
-  this.authorizeWithServiceAccount = function(){
-    var details = parseArguments(arguments, ["access_token"]);
-
-    httpPost('/v1/service_account_authorizations', details.options, details.callback);
   }
 }
 
