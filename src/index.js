@@ -4,16 +4,12 @@ import _ from 'lodash';
 import rest from './lib/rest-client';
 
 /*
-import listNotificationChannels from './methods/list-notification-channels';
-import profileInformation from './methods/profile-information';
 import readEvents from './methods/read-events';
 import refreshAccessToken from './methods/refresh-access-token';
 import requestAccessToken from './methods/request-access-token';
 import revokeAuthorization from './methods/revoke-authorization';
 
 const methods = {
-  listNotificationChannels,
-  profileInformation,
   readEvents,
   refreshAccessToken,
   requestAccessToken,
@@ -92,6 +88,12 @@ var cronofy = function(config){
     var details = parseArguments(arguments, ["access_token"]);
 
     httpGet('/v1/channels', details.options, details.callback);
+  }
+
+  this.profileInformation = function(){
+    var details = parseArguments(arguments, ["access_token"]);
+
+    httpGet('/v1/profiles', details.options, details.callback);
   }
 
   var urls = {
