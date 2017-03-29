@@ -3,6 +3,13 @@
 import _ from 'lodash';
 import rest from './lib/rest-client';
 
+var tap = function(func){
+  return function(value){
+    func.apply(null, arguments);
+    return value;
+  }
+}
+
 var cronofy = function(config){
   this.accountInformation = function(){
     var details = parseArguments(arguments, ["access_token"]);
@@ -93,12 +100,15 @@ var cronofy = function(config){
 
     details.options.grant_type = "refresh_token";
 
-    return httpPost('/oauth/token', details.options, function(token){
+    return httpPost('/oauth/token', details.options).then(tap(function(token){
       config.access_token = token.access_token;
       config.refresh_token = token.refresh_token;
 
-      details.callback(token);
-    });
+
+      if(details.callback){
+        details.callback(null, token);
+      }
+    }), details.callback);
   }
 
   this.requestAccessToken = function(){
@@ -106,25 +116,27 @@ var cronofy = function(config){
 
     details.options.grant_type = "authorization_code";
 
-    return httpPost('/oauth/token', details.options, function(token){
+    return httpPost('/oauth/token', details.options).then(tap(function(token){
       config.access_token = token.access_token;
       config.refresh_token = token.refresh_token;
 
-      details.callback(token);
-    })
+      if(details.callback){
+        details.callback(null, token);
+      }
+    }), details.callback);
   }
 
   this.revokeAuthorization = function(){
     var details = parseArguments(arguments, ["client_id", "client_secret", "refresh_token"]);
 
-    return httpPost('/oauth/token/revoke', details.options, function(){
+    return httpPost('/oauth/token/revoke', details.options).then(tap(function(){
       delete config.access_token;
       delete config.refresh_token;
 
-      console.log(config);
-
-      details.callback();
-    })
+      if(details.callback){
+        details.callback();
+      }
+    }), details.callback);
   }
 
   var urls = {
@@ -155,13 +167,17 @@ var cronofy = function(config){
     };
 
     return new Promise(function(resolve, reject){
-      callback = callback || resolve;
-      
       rest(settings).then(function(result){
-        if(result['entity']) {
-          callback(result['entity']);
+        if(callback){
+          callback(null, result['entity']);
         } else {
-          callback();
+          resolve(result['entity']);
+        }
+      }, function(err){
+        if(callback){
+          callback(err);
+        } else {
+          reject(err);
         }
       });
     });
