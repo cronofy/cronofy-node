@@ -70,7 +70,7 @@ var cronofy = function(config){
   this.freeBusy = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
-    return httpGet('/v1/free_busy', details.options, details.callback);
+    return httpGet(details.options.next_page || '/v1/free_busy', details.options, details.callback);
   }
 
   this.listCalendars = function(){
@@ -94,7 +94,7 @@ var cronofy = function(config){
   this.readEvents = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
-    return httpGet('/v1/events', details.options, details.callback);
+    return httpGet(details.options.next_page || '/v1/events', details.options, details.callback);
   }
 
   this.refreshAccessToken = function(){
