@@ -176,10 +176,9 @@ var cronofy = function(config){
           resolve(result['entity']);
         }
       }, function(err){
-        var error = {
-          status_code: err.status.code,
-          error: err.entity
-        };
+        var error = new Error(JSON.stringify(err.entity));
+        error.statusCode = err.status.code;
+
         if(callback){
           callback(error);
         } else {
