@@ -11,6 +11,11 @@ var tap = function(func){
 }
 
 var cronofy = function(config){
+  if(!this || this.constructor !== cronofy){
+    console.log("Cronofy must be called as a constructor");
+    return;
+  }
+
   this.config = config;
 
   this.accountInformation = function(){
