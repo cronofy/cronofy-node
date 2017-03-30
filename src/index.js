@@ -176,10 +176,14 @@ var cronofy = function(config){
           resolve(result['entity']);
         }
       }, function(err){
+        var error = {
+          status_code: err.status.code,
+          error: err.entity
+        };
         if(callback){
-          callback(err);
+          callback(error);
         } else {
-          reject(err);
+          reject(error);
         }
       });
     });
