@@ -9,9 +9,9 @@ The APIs should be one to one with the all of the current methods in [Cronofy's 
 #### Usage Example
 
 ```node
-var cronofy = require('cronofy');
+var Cronofy = require('cronofy');
 
-var client = cronofy({
+var cronofyClient = new Cronofy({
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
   client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf',
   access_token: 'aLUj9bRInSj1n08pHPAo5ru0OOppDaCO',
@@ -23,13 +23,13 @@ var options = {
   redirect_uri: 'https://www.yoursite.com/calendar_redirect_page'
 };
 
-client.requestAccessToken(options)
+cronofyClient.requestAccessToken(options)
   .then(function(response){
     console.log(response);
   });
 
 // Alternatively as a callback
-client.requestAccessToken(options, function(err, response){
+cronofyClient.requestAccessToken(options, function(err, response){
   if(err) throw err;
   console.log(response);
 })

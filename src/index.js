@@ -11,6 +11,8 @@ var tap = function(func){
 }
 
 var cronofy = function(config){
+  this.config = config;
+
   this.accountInformation = function(){
     var details = parseArguments(arguments, ["access_token"]);
 
