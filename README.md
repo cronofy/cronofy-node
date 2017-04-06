@@ -175,8 +175,7 @@ Takes options object and an optional callback, either returning a promise for, o
 
 ### listNotificationChannels([callback])
 
-<<<<<<< HEAD
-Takes dataCenter string to specify which data center for the Cronofy instance to target.
+Takes an optional callback, either returning a promise for, or calling the provided callback with a list of notification channels.
 
 ### addToCalendar(options[, callback])
 
@@ -199,7 +198,3 @@ Takes options object and an optional callback, either returning a promise for, o
   - **url** - optional - The event's URL.
   - **reminders** - optional - The event's reminders.
   - **transparency** - optional - The event's transparency.
-
-=======
-Takes an optional callback, either returning a promise for, or calling the provided callback with a list of notification channels.
->>>>>>> master
