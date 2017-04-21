@@ -97,6 +97,12 @@ cronofy.prototype.accountInformation = function(){
   return this._httpGet('/v1/account', details.options, details.callback);
 }
 
+cronofy.prototype.addToCalendar = function(){
+  var details = this._parseArguments(arguments, ["client_id", "client_secret"]);
+
+  return this._httpPost('/v1/add_to_calendar', details.options, details.callback);
+}
+
 cronofy.prototype.authorizeWithServiceAccount = function(){
   var details = this._parseArguments(arguments, ["access_token"]);
 

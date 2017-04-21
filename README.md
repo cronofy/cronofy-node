@@ -176,3 +176,25 @@ Takes options object and an optional callback, either returning a promise for, o
 ### listNotificationChannels([callback])
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with a list of notification channels.
+
+### addToCalendar(options[, callback])
+
+Takes options object and an optional callback, either returning a promise for, or caling the provided callback with a URL to redirect the user towards
+
+#### Options Object
+
+- **client_id** - required - The client ID.
+- **client_secret** - required - The client secret.
+- **oauth** - required - The OAuth information for the end-user to connect their calendar.
+  - **redirect_uri** - required - The URL to send the end-user to after completing the Add To Calendar flow.
+  - **scope** - required - The scope to request from the end-user during the oauth flow.
+- **event** - required - The event to create in the user's calendar.
+  - **event_id** - required - The event's ID.
+  - **summary** - required - The event's summary.
+  - **start** - required - The event's start date.
+  - **end** - required - The event's end date.
+  - **description** - required - The event's description.
+  - **location** - optional - The event's location.
+  - **url** - optional - The event's URL.
+  - **reminders** - optional - The event's reminders.
+  - **transparency** - optional - The event's transparency.
