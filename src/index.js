@@ -18,7 +18,7 @@ var cronofy = function(config){
   this.config = config;
 
   this.urls = {
-    api: 'http://local' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
+    api: 'http://api' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
   };
 }
 
@@ -42,7 +42,9 @@ cronofy.prototype._httpCall = function(method, path, options, callback, optionsT
       }
     }, function(err){
       var error = new Error(JSON.stringify(err.entity));
-      error.statusCode = err.status.code;
+      if(err.status){
+        error.statusCode = err.status.code;
+      }
 
       if(callback){
         callback(error);
