@@ -180,6 +180,10 @@ cronofy.prototype.profileInformation = function(){
 cronofy.prototype.readEvents = function(){
   var details = this._parseArguments(arguments, ["access_token"]);
 
+  if (details.options.next_page && details.options.next_page.startsWith(this.urls.api)) {
+    details.options.next_page = details.options.next_page.substr(this.urls.api.length);
+  }
+
   return this._httpGet(details.options.next_page || '/v1/events', details.options, details.callback);
 }
 
