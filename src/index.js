@@ -184,7 +184,7 @@ cronofy.prototype.readEvents = function(){
     return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
   }
 
-  return this._httpGet(details.options.next_page || '/v1/events', details.options, details.callback);
+  return this._httpGet('/v1/events', details.options, details.callback);
 }
 
 cronofy.prototype.refreshAccessToken = function(){
