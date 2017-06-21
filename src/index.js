@@ -25,7 +25,7 @@ var cronofy = function(config){
 cronofy.prototype._httpCall = function(method, path, options, callback, optionsToOmit){
   var settings = {
     method: method,
-    path: this.urls.api + path,
+    path: path,
     headers: {
       Authorization: 'Bearer ' + options.access_token,
       'Content-Type': 'application/json'
@@ -82,15 +82,15 @@ cronofy.prototype._parseArguments = function(args, configDefaults){
 }
 
 cronofy.prototype._httpGet = function(path, options, callback, optionsToOmit){
-  return this._httpCall('GET', path, options, callback, optionsToOmit);
+  return this._httpCall('GET', this.urls.api + path, options, callback, optionsToOmit);
 }
 
 cronofy.prototype._httpPost = function(path, options, callback, optionsToOmit){
-  return this._httpCall('POST', path, options, callback, optionsToOmit);
+  return this._httpCall('POST', this.urls.api + path, options, callback, optionsToOmit);
 }
 
 cronofy.prototype._httpDelete = function(path, options, callback, optionsToOmit){
-  return this._httpCall('DELETE', path, options, callback, optionsToOmit);
+  return this._httpCall('DELETE', this.urls.api + path, options, callback, optionsToOmit);
 }
 
 cronofy.prototype.accountInformation = function(){
@@ -180,7 +180,11 @@ cronofy.prototype.profileInformation = function(){
 cronofy.prototype.readEvents = function(){
   var details = this._parseArguments(arguments, ["access_token"]);
 
-  return this._httpGet(details.options.next_page || '/v1/events', details.options, details.callback);
+  if (details.options.next_page) {
+    return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
+  }
+
+  return this._httpGet('/v1/events', details.options, details.callback);
 }
 
 cronofy.prototype.refreshAccessToken = function(){
