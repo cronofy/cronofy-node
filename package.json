@@ -2,13 +2,11 @@
   "name": "cronofy",
   "version": "2.1.2",
   "description": "A simple wrapper for the Cronofy API",
-  "main": "./build/index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "prebuild": "rm -rf build && mkdir build",
-    "build": "babel ./src/ --out-dir ./build",
-    "prepublish": "npm run build",
+    "prepublish": "npm test",
     "test": "semistandard --fix",
-    "start": "node ./build/index.js"
+    "start": "node ./src/index.js"
   },
   "repository": {
     "type": "git",
