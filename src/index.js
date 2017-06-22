@@ -1,7 +1,7 @@
 'use strict';
 
-import _ from 'lodash';
-import rest from './lib/rest-client';
+var _ = require('lodash');
+var rest = require('./lib/rest-client');
 
 var tap = function (func) {
   return function (value) {
@@ -233,4 +233,4 @@ cronofy.prototype.revokeAuthorization = function () {
   }), details.callback);
 };
 
-export default cronofy;
+module.exports = cronofy;
