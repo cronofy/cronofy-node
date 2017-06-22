@@ -5,7 +5,7 @@ var defaultRequest = require('rest/interceptor/defaultRequest');
 var mime = require('rest/interceptor/mime');
 var errorCode = require('rest/interceptor/errorCode');
 
-const client = rest
+var client = rest
   .wrap(defaultRequest, { headers: { 'User-Agent': 'Cronofy Node' } })
   .wrap(mime, { mime: 'application/json' })
   .wrap(errorCode);
