@@ -29,9 +29,9 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
     headers: {
       Authorization: 'Bearer ' + options.access_token,
       'Content-Type': 'application/json'
-    },
-    entity: _.omit(options, optionsToOmit || ['access_token'])
+    }
   };
+  settings[method === 'GET' ? 'params' : 'entity'] = _.omit(options, optionsToOmit || ['access_token']);
 
   return new Promise(function (resolve, reject) {
     rest(settings).then(function (result) {
