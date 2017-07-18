@@ -105,6 +105,12 @@ cronofy.prototype.addToCalendar = function () {
   return this._httpPost('/v1/add_to_calendar', details.options, details.callback);
 };
 
+cronofy.prototype.realTimeScheduling = function () {
+  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+
+  return this._httpPost('/v1/real_time_scheduling', details.options, details.callback);
+};
+
 cronofy.prototype.authorizeWithServiceAccount = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
