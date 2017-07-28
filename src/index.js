@@ -171,6 +171,12 @@ cronofy.prototype.listCalendars = function () {
   return this._httpGet('/v1/calendars', details.options, details.callback);
 };
 
+cronofy.prototype.createCalendar = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/calendars', details.options, details.callback);
+};
+
 cronofy.prototype.listNotificationChannels = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
