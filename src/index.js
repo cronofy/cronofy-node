@@ -199,6 +199,12 @@ cronofy.prototype.readEvents = function () {
   return this._httpGet('/v1/events', details.options, details.callback);
 };
 
+cronofy.prototype.revokeProfileAuthorization = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/profiles/' + details.options.profile_id + '/revoke', details.options, details.callback);
+};
+
 cronofy.prototype.refreshAccessToken = function () {
   var that = this;
   var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
