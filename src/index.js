@@ -27,7 +27,7 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
     method: method,
     path: path,
     headers: {
-      Authorization: 'Bearer ' + options.access_token,
+      Authorization: 'Bearer ' + (options.access_token || options.bearer_token),
       'Content-Type': 'application/json'
     },
     entity: _.omit(options, optionsToOmit || ['access_token'])
@@ -249,6 +249,23 @@ cronofy.prototype.revokeAuthorization = function () {
       details.callback();
     }
   }), details.callback);
+};
+
+cronofy.prototype.getSmartInvite = function () {
+  var details = this._parseArguments(arguments, ['smart_invite_id', 'recipient_email', 'client_secret']);
+  var url = '/v1/smart_invites?smart_invite_id='+ details.options.smart_invite_id +'&recipient_email=' + details.options.recipient_email;
+
+  details.options.bearer_token = details.options.client_secret;
+
+  return this._httpGet(url, details.options, details.callback, ['client_secret', 'access_token', 'bearer_token']);
+};
+
+cronofy.prototype.createSmartInvite = function () {
+  var details = this._parseArguments(arguments, ['client_secret']);
+
+  details.options.bearer_token = details.options.client_secret;
+
+  return this._httpPost('/v1/smart_invites', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
 };
 
 module.exports = cronofy;
