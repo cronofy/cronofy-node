@@ -253,11 +253,10 @@ cronofy.prototype.revokeAuthorization = function () {
 
 cronofy.prototype.getSmartInvite = function () {
   var details = this._parseArguments(arguments, ['smart_invite_id', 'recipient_email', 'client_secret']);
-  var url = '/v1/smart_invites?smart_invite_id='+ details.options.smart_invite_id +'&recipient_email=' + details.options.recipient_email;
 
   details.options.bearer_token = details.options.client_secret;
 
-  return this._httpGet(url, details.options, details.callback, ['client_secret', 'access_token', 'bearer_token']);
+  return this._httpGet('/v1/smart_invites', details.options, details.callback, ['client_secret', 'access_token', 'bearer_token']);
 };
 
 cronofy.prototype.createSmartInvite = function () {
