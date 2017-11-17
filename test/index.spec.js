@@ -83,20 +83,13 @@ describe('Smart Invites', function () {
     });
   });
 
-  it('can cancel create an invite', function (done) {
+  it('can cancel an invite', function (done) {
     var smartInviteRequest = {
+      'method': 'cancel',
       'recipient': {
         'email': 'cronofy@example.com'
       },
-      'smart_invite_id': 'your-unique-identifier-for-invite',
-      'callback_url': 'https://example.yourapp.com/cronofy/smart_invite/notifications',
-      'event': {
-        'summary': 'Board meeting',
-        'description': 'Discuss plans for the next quarter.',
-        'start': '2017-10-05T09:30:00Z',
-        'end': '2017-10-05T10:00:00Z',
-        'tzid': 'Europe/London'
-      }
+      'smart_invite_id': 'your-unique-identifier-for-invite'
     };
 
     var smartInviteResponse = {
@@ -131,7 +124,14 @@ describe('Smart Invites', function () {
       .post('/v1/smart_invites', smartInviteRequest)
       .reply(200, smartInviteResponse);
 
-    api.createSmartInvite(_.cloneDeep(smartInviteRequest), function (_, result) {
+    var args = {
+      'recipient': {
+        'email': 'cronofy@example.com'
+      },
+      'smart_invite_id': 'your-unique-identifier-for-invite'
+    };
+
+    api.cancelSmartInvite(_.cloneDeep(args), function (_, result) {
       expect(result).to.deep.equal(smartInviteResponse);
       done();
     });

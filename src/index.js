@@ -267,4 +267,13 @@ cronofy.prototype.createSmartInvite = function () {
   return this._httpPost('/v1/smart_invites', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
 };
 
+cronofy.prototype.cancelSmartInvite = function () {
+  var details = this._parseArguments(arguments, ['client_secret']);
+
+  details.options.bearer_token = details.options.client_secret;
+  details.options.method = 'cancel';
+
+  return this._httpPost('/v1/smart_invites', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
+};
+
 module.exports = cronofy;
