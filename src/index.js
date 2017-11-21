@@ -42,6 +42,9 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
       }
     }, function (err) {
       var error = new Error(JSON.stringify(err.entity));
+
+      error.error = err;
+
       if (err.status) {
         error.statusCode = err.status.code;
       }
