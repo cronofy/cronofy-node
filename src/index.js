@@ -34,6 +34,7 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
       'User-Agent': 'Cronofy Node'
     }
   };
+
   if (method === 'GET') {
     settings['qs'] = _.omit(options, optionsToOmit || ['access_token']);
   } else {
@@ -42,11 +43,22 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
 
   return new Promise(function (resolve, reject) {
     request(settings, function (error, result, body) {
-      if (error) {
+      if (error || result.statusCode >= 400) {
+        var err = new Error(JSON.stringify(body));
+
+        if (result && result.statusCode) {
+          err.statusCode = result.statusCode;
+        }
+
+        err.error = {
+          url: path,
+          entity: body
+        };
+
         if (callback) {
-          callback(error);
+          callback(err);
         } else {
-          reject(error);
+          reject(err);
         }
       } else {
         if (callback) {

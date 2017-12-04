@@ -89,6 +89,61 @@ describe('accept encoding', function () {
   });
 });
 
+describe('token refresh', function () {
+  it('returns new token information', function (done) {
+    var refreshToken = '12312312nakjsdnasd';
+
+    var refreshResponse = {
+      token_type: 'bearer',
+      access_token: '090jsadkasdkjnasda',
+      expires_in: 3600,
+      refresh_token: '894576984569kasbdkasbd',
+      scope: 'create_event'
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/oauth/token', {
+        client_id: api.config.client_id,
+        client_secret: api.config.client_secret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      })
+      .reply(200, refreshResponse);
+
+    api.refreshAccessToken({ refresh_token: refreshToken }, function (_, result) {
+      expect(result).to.deep.equal(refreshResponse);
+      done();
+    });
+  });
+
+  it('returns context for unrecognized token', function (done) {
+    var refreshToken = '12312312nakjsdnasd';
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'content-type': 'application/json'
+      }
+    })
+      .post('/oauth/token', {
+        client_id: api.config.client_id,
+        client_secret: api.config.client_secret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      })
+      .reply(400, { error: 'invalid_grant' });
+
+    api.refreshAccessToken({ refresh_token: refreshToken }, function (err, _) {
+      expect(err.error.url).to.equal('https://api.cronofy.com/oauth/token');
+      expect(err.error.entity).to.deep.equal({ 'error': 'invalid_grant' });
+      done();
+    });
+  });
+});
+
 describe('Smart Invites', function () {
   it('can create an invite', function (done) {
     var smartInviteRequest = {
