@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var expect = require('chai').expect;
 var nock = require('nock');
+var zlib = require('zlib');
 var Cronofy = require('../src/index');
 
 var api = new Cronofy({
@@ -24,6 +25,65 @@ describe('Get Account Information', function () {
 
     api.accountInformation(function (_, result) {
       expect(result).to.deep.equal(accountResponse);
+      done();
+    });
+  });
+});
+
+describe('accept encoding', function () {
+  it('can receive a compressed post', function (done) {
+    var smartInviteRequest = {
+      'recipient': {
+        'email': 'cronofy@example.com'
+      },
+      'smart_invite_id': 'your-unique-identifier-for-invite',
+      'callback_url': 'https://example.yourapp.com/cronofy/smart_invite/notifications',
+      'event': {
+        'summary': 'Board meeting',
+        'description': 'Discuss plans for the next quarter.',
+        'start': '2017-10-05T09:30:00Z',
+        'end': '2017-10-05T10:00:00Z',
+        'tzid': 'Europe/London'
+      }
+    };
+
+    var smartInviteResponse = {
+      'recipient': {
+        'email': 'cronofy@example.com',
+        'status': 'pending'
+      },
+      'smart_invite_id': 'your-unique-identifier-for-invite',
+      'callback_url': 'https://example.yourapp.com/cronofy/smart_invite/notifications',
+      'event': {
+        'summary': 'Board meeting',
+        'description': 'Discuss plans for the next quarter.',
+        'start': '2017-10-05T09:30:00Z',
+        'end': '2017-10-05T10:00:00Z',
+        'tzid': 'Europe/London',
+        'location': {
+          'description': 'Board room'
+        }
+      },
+      'attachments': {
+        'icalendar': 'BEGIN:VCALENDAR\nVERSION:2.0...'
+      }
+    };
+
+    var buf = JSON.stringify(smartInviteResponse);
+    var compressedResponse = zlib.gzipSync(buf);
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.client_secret,
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip, deflate'
+      }
+    })
+      .post('/v1/smart_invites', smartInviteRequest)
+      .reply(200, compressedResponse, { 'Content-Encoding': 'gzip' });
+
+    api.createSmartInvite(_.cloneDeep(smartInviteRequest), function (_, result) {
+      expect(JSON.stringify(result)).to.equal(JSON.stringify(smartInviteResponse));
       done();
     });
   });
