@@ -24,7 +24,7 @@
   "homepage": "https://github.com/cronofy/cronofy-node#readme",
   "dependencies": {
     "lodash": "^4.17.4",
-    "rest": "^2.0.0"
+    "request": "^2.0.0"
   },
   "semistandard": {
     "env": [ "mocha" ]

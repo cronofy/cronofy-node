@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var rest = require('./lib/rest-client');
+var request = require('request');
 
 var tap = function (func) {
   return function (value) {
@@ -25,31 +25,47 @@ var cronofy = function (config) {
 cronofy.prototype._httpCall = function (method, path, options, callback, optionsToOmit) {
   var settings = {
     method: method,
-    path: path,
+    url: path,
+    gzip: true,
+    json: true,
     headers: {
       Authorization: 'Bearer ' + (options.access_token || options.bearer_token),
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'User-Agent': 'Cronofy Node'
     }
   };
-  settings[method === 'GET' ? 'params' : 'entity'] = _.omit(options, optionsToOmit || ['access_token']);
+
+  if (method === 'GET') {
+    settings['qs'] = _.omit(options, optionsToOmit || ['access_token']);
+  } else {
+    settings['body'] = _.omit(options, optionsToOmit || ['access_token']);
+  }
 
   return new Promise(function (resolve, reject) {
-    rest(settings).then(function (result) {
-      if (callback) {
-        callback(null, result['entity']);
-      } else {
-        resolve(result['entity']);
-      }
-    }, function (err) {
-      var error = new Error(JSON.stringify(err.entity));
-      if (err.status) {
-        error.statusCode = err.status.code;
-      }
+    request(settings, function (error, result, body) {
+      if (error || result.statusCode >= 400) {
+        var err = new Error(JSON.stringify(body));
 
-      if (callback) {
-        callback(error);
+        if (result && result.statusCode) {
+          err.statusCode = result.statusCode;
+        }
+
+        err.error = {
+          url: path,
+          entity: body
+        };
+
+        if (callback) {
+          callback(err);
+        } else {
+          reject(err);
+        }
       } else {
-        reject(error);
+        if (callback) {
+          callback(null, body);
+        } else {
+          resolve(body);
+        }
       }
     });
   });

@@ -1,6 +1,7 @@
 var _ = require('lodash');
 var expect = require('chai').expect;
 var nock = require('nock');
+var zlib = require('zlib');
 var Cronofy = require('../src/index');
 
 var api = new Cronofy({
@@ -24,6 +25,120 @@ describe('Get Account Information', function () {
 
     api.accountInformation(function (_, result) {
       expect(result).to.deep.equal(accountResponse);
+      done();
+    });
+  });
+});
+
+describe('accept encoding', function () {
+  it('can receive a compressed post', function (done) {
+    var smartInviteRequest = {
+      'recipient': {
+        'email': 'cronofy@example.com'
+      },
+      'smart_invite_id': 'your-unique-identifier-for-invite',
+      'callback_url': 'https://example.yourapp.com/cronofy/smart_invite/notifications',
+      'event': {
+        'summary': 'Board meeting',
+        'description': 'Discuss plans for the next quarter.',
+        'start': '2017-10-05T09:30:00Z',
+        'end': '2017-10-05T10:00:00Z',
+        'tzid': 'Europe/London'
+      }
+    };
+
+    var smartInviteResponse = {
+      'recipient': {
+        'email': 'cronofy@example.com',
+        'status': 'pending'
+      },
+      'smart_invite_id': 'your-unique-identifier-for-invite',
+      'callback_url': 'https://example.yourapp.com/cronofy/smart_invite/notifications',
+      'event': {
+        'summary': 'Board meeting',
+        'description': 'Discuss plans for the next quarter.',
+        'start': '2017-10-05T09:30:00Z',
+        'end': '2017-10-05T10:00:00Z',
+        'tzid': 'Europe/London',
+        'location': {
+          'description': 'Board room'
+        }
+      },
+      'attachments': {
+        'icalendar': 'BEGIN:VCALENDAR\nVERSION:2.0...'
+      }
+    };
+
+    var buf = JSON.stringify(smartInviteResponse);
+    var compressedResponse = zlib.gzipSync(buf);
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.client_secret,
+        'Content-Type': 'application/json',
+        'Accept-Encoding': 'gzip, deflate'
+      }
+    })
+      .post('/v1/smart_invites', smartInviteRequest)
+      .reply(200, compressedResponse, { 'Content-Encoding': 'gzip' });
+
+    api.createSmartInvite(_.cloneDeep(smartInviteRequest), function (_, result) {
+      expect(JSON.stringify(result)).to.equal(JSON.stringify(smartInviteResponse));
+      done();
+    });
+  });
+});
+
+describe('token refresh', function () {
+  it('returns new token information', function (done) {
+    var refreshToken = '12312312nakjsdnasd';
+
+    var refreshResponse = {
+      token_type: 'bearer',
+      access_token: '090jsadkasdkjnasda',
+      expires_in: 3600,
+      refresh_token: '894576984569kasbdkasbd',
+      scope: 'create_event'
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/oauth/token', {
+        client_id: api.config.client_id,
+        client_secret: api.config.client_secret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      })
+      .reply(200, refreshResponse);
+
+    api.refreshAccessToken({ refresh_token: refreshToken }, function (_, result) {
+      expect(result).to.deep.equal(refreshResponse);
+      done();
+    });
+  });
+
+  it('returns context for unrecognized token', function (done) {
+    var refreshToken = '12312312nakjsdnasd';
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'content-type': 'application/json'
+      }
+    })
+      .post('/oauth/token', {
+        client_id: api.config.client_id,
+        client_secret: api.config.client_secret,
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken
+      })
+      .reply(400, { error: 'invalid_grant' });
+
+    api.refreshAccessToken({ refresh_token: refreshToken }, function (err, _) {
+      expect(err.error.url).to.equal('https://api.cronofy.com/oauth/token');
+      expect(err.error.entity).to.deep.equal({ 'error': 'invalid_grant' });
       done();
     });
   });
