@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var request = require('request');
+var version = require('../package.json').version;
 
 var tap = function (func) {
   return function (value) {
@@ -31,7 +32,7 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
     headers: {
       Authorization: 'Bearer ' + (options.access_token || options.bearer_token),
       'Content-Type': 'application/json',
-      'User-Agent': 'Cronofy Node'
+      'User-Agent': 'Cronofy Node - ' + version
     }
   };
 
