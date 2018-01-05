@@ -192,7 +192,7 @@ describe('query parameters encoding', function () {
     };
 
     var args = {
-      calendar_ids: ['acc_32434893483'],
+      calendar_ids: ['acc_123'],
       include_deleted: true,
       tzid: 'Etc/UTC'
     };
@@ -203,8 +203,7 @@ describe('query parameters encoding', function () {
         'Content-Type': 'application/json'
       }
     })
-      .get('/v1/events')
-      .query(args)
+      .get('/v1/events?calendar_ids%5B%5D=acc_123&include_deleted=true&tzid=Etc%2FUTC')
       .reply(200, readEventsResponse);
 
     api.readEvents(_.cloneDeep(args), function (_, result) {
