@@ -33,7 +33,8 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
       Authorization: 'Bearer ' + (options.access_token || options.bearer_token),
       'Content-Type': 'application/json',
       'User-Agent': 'Cronofy Node - ' + version
-    }
+    },
+    qsStringifyOptions: { arrayFormat: 'brackets' }
   };
 
   if (method === 'GET') {

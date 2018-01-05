@@ -144,6 +144,76 @@ describe('token refresh', function () {
   });
 });
 
+describe('query parameters encoding', function () {
+  it('returns read events information', function (done) {
+    var readEventsResponse = {
+      'pages': {
+        'current': 1,
+        'total': 2,
+        'next_page': 'https://api.cronofy.com/v1/events/pages/08a07b034306679e'
+      },
+      'events': [
+        {
+          'calendar_id': 'cal_U9uuErStTG@EAAAB_IsAsykA2DBTWqQTf-f0kJw',
+          'event_uid': 'evt_external_54008b1a4a41730f8d5c6037',
+          'summary': 'Company Retreat',
+          'description': '',
+          'start': '2014-09-06',
+          'end': '2014-09-08',
+          'deleted': false,
+          'created': '2014-09-01T08:00:01Z',
+          'updated': '2014-09-01T09:24:16Z',
+          'location': {
+            'description': 'Beach'
+          },
+          'participation_status': 'needs_action',
+          'attendees': [
+            {
+              'email': 'example@cronofy.com',
+              'display_name': 'Example Person',
+              'status': 'needs_action'
+            }
+          ],
+          'organizer': {
+            'email': 'example@cronofy.com',
+            'display_name': 'Example Person'
+          },
+          'transparency': 'opaque',
+          'status': 'confirmed',
+          'categories': [],
+          'recurring': false,
+          'options': {
+            'delete': true,
+            'update': true,
+            'change_participation_status': true
+          }
+        }
+      ]
+    };
+
+    var args = {
+      calendar_ids: ['acc_32434893483'],
+      include_deleted: true,
+      tzid: 'Etc/UTC'
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/events')
+      .query(args)
+      .reply(200, readEventsResponse);
+
+    api.readEvents(_.cloneDeep(args), function (_, result) {
+      expect(result).to.deep.equal(readEventsResponse);
+      done();
+    });
+  });
+});
+
 describe('Smart Invites', function () {
   it('can create an invite', function (done) {
     var smartInviteRequest = {
