@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/cronofy/cronofy-node#readme",
   "dependencies": {
-    "lodash": "^4.17.4",
     "request": "^2.0.0"
   },
   "semistandard": {
@@ -36,6 +35,7 @@
     "mocha": "^4.0.1",
     "mocha-standard": "^1.0.0",
     "nock": "^9.0.24",
-    "semistandard": "^11.0.0"
+    "semistandard": "^11.0.0",
+    "lodash": "^4.17.4"
   }
 }

@@ -1,6 +1,5 @@
 'use strict';
 
-var _ = require('lodash');
 var request = require('request');
 var version = require('../package.json').version;
 
@@ -23,6 +22,21 @@ var cronofy = function (config) {
   };
 };
 
+var omit = function (obj, props) {
+  var keys = Object.keys(obj);
+  var res = {};
+
+  for (var i = 0; i < keys.length; i++) {
+    var key = keys[i];
+    var val = obj[key];
+
+    if (!props || props.indexOf(key) === -1) {
+      res[key] = val;
+    }
+  }
+  return res;
+};
+
 cronofy.prototype._httpCall = function (method, path, options, callback, optionsToOmit) {
   var settings = {
     method: method,
@@ -38,9 +52,9 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
   };
 
   if (method === 'GET') {
-    settings['qs'] = _.omit(options, optionsToOmit || ['access_token']);
+    settings['qs'] = omit(options, optionsToOmit || ['access_token']);
   } else {
-    settings['body'] = _.omit(options, optionsToOmit || ['access_token']);
+    settings['body'] = omit(options, optionsToOmit || ['access_token']);
   }
 
   return new Promise(function (resolve, reject) {
