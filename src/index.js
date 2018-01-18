@@ -231,6 +231,20 @@ cronofy.prototype.readEvents = function () {
   return this._httpGet('/v1/events', details.options, details.callback);
 };
 
+cronofy.prototype.applicationCalendar = function () {
+  var that = this;
+  var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'application_calendar_id']);
+
+  return this._httpPost('/v1/application_calendars', details.options).then(tap(function (response) {
+    that.config.access_token = response.access_token;
+    that.config.refresh_token = response.refresh_token;
+
+    if (details.callback) {
+      details.callback(null, response);
+    }
+  }), details.callback);
+};
+
 cronofy.prototype.revokeProfileAuthorization = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
