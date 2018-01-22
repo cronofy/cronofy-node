@@ -10,7 +10,10 @@ install:
 test:
 	npm test
 
-release: test
+check_dependencies:
+	@command -v jq >/dev/null || (echo "jq not installed please install via homebrew - 'brew install jq'"; exit 1)
+
+release: check_dependencies test
 	npm publish
 	git tag v$(CURRENT_VERSION)
 	git push --tags
