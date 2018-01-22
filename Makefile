@@ -1,4 +1,7 @@
 .PHONY: test
+
+CURRENT_VERSION:=$(shell jq ".version" -r package.json)
+
 all: install
 
 install:
@@ -9,3 +12,5 @@ test:
 
 release: test
 	npm publish
+	git tag v$(CURRENT_VERSION)
+	git push --tags
