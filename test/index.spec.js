@@ -44,6 +44,9 @@ describe('accept encoding', function () {
         'start': '2017-10-05T09:30:00Z',
         'end': '2017-10-05T10:00:00Z',
         'tzid': 'Europe/London'
+      },
+      'organizer': {
+        'name': 'Smart invite application'
       }
     };
 
