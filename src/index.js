@@ -173,6 +173,12 @@ cronofy.prototype.deleteEvent = function () {
   return this._httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
 };
 
+cronofy.prototype.bulkDeleteEvents = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpDelete('/v1/events', details.options, details.callback, ['access_token']);
+};
+
 cronofy.prototype.deleteExternalEvent = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
