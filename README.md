@@ -82,6 +82,15 @@ Returns an empty string/promise for an empty string on success.
  - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **event_id** - required - An id for the event you want to delete.
 
+### bulkDeleteEvents(options,[, callback])
+
+Returns an empty string/promise for an empty string on success.
+
+#### Options Object
+
+ - **calendar_ids** - optional - An Array of calendar ids to delete events from.
+ - **delete_all** - optional - A Boolean value indicating if all events should be deleted.
+
 ### freeBusy(options[, callback])
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with a list of free/busy information across all calendars.
