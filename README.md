@@ -119,7 +119,7 @@ Takes options object and an optional callback, either returning a promise for, o
 - **tzid** - the timezone id for the query.
 - **next_page** - url for the next page. This will still apply other options to the request.
 
-### refreshAccessToken(options[, callback])
+### refreshAccessToken([callback])
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with the new refresh and access token information.
 
