@@ -28,6 +28,23 @@ describe('Get Account Information', function () {
       done();
     });
   });
+
+  it('returns context unauthorized request error', function (done) {
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/account')
+      .reply(401);
+
+    api.accountInformation(function (err, _) {
+      expect(err.error.url).to.equal('https://api.cronofy.com/v1/account');
+      expect(err.statusCode).to.equal(401);
+      done();
+    });
+  });
 });
 
 describe('accept encoding', function () {
