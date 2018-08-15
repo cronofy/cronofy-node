@@ -37,10 +37,14 @@ describe('Get Account Information', function () {
       }
     })
       .get('/v1/account')
-      .reply(401);
+      .reply(401, {
+        'WWW-Authenticate': 'Example Authentication Error'
+      });
 
     api.accountInformation(function (err, _) {
       expect(err.error.url).to.equal('https://api.cronofy.com/v1/account');
+      expect(err.message).to.equal('{"WWW-Authenticate":"Example Authentication Error"}');
+      expect(err.error.entity['WWW-Authenticate']).to.equal('Example Authentication Error');
       expect(err.statusCode).to.equal(401);
       done();
     });
