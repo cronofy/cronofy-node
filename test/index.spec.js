@@ -28,6 +28,27 @@ describe('Get Account Information', function () {
       done();
     });
   });
+
+  it('returns context unauthorized request error', function (done) {
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/account')
+      .reply(401, {
+        'WWW-Authenticate': 'Example Authentication Error'
+      });
+
+    api.accountInformation(function (err, _) {
+      expect(err.error.url).to.equal('https://api.cronofy.com/v1/account');
+      expect(err.message).to.equal('{"WWW-Authenticate":"Example Authentication Error"}');
+      expect(err.error.entity['WWW-Authenticate']).to.equal('Example Authentication Error');
+      expect(err.statusCode).to.equal(401);
+      done();
+    });
+  });
 });
 
 describe('accept encoding', function () {
