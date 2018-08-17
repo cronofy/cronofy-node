@@ -143,6 +143,12 @@ cronofy.prototype.realTimeScheduling = function () {
   return this._httpPost('/v1/real_time_scheduling', details.options, details.callback);
 };
 
+cronofy.prototype.realTimeSequencing = function () {
+  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+
+  return this._httpPost('/v1/real_time_sequencing', details.options, details.callback);
+};
+
 cronofy.prototype.authorizeWithServiceAccount = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
@@ -153,6 +159,12 @@ cronofy.prototype.availability = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/availability', details.options, details.callback);
+};
+
+cronofy.prototype.sequencedAvailability = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/sequenced_availability', details.options, details.callback);
 };
 
 cronofy.prototype.createEvent = function () {
