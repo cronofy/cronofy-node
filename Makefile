@@ -17,3 +17,4 @@ release: check_dependencies test
 	npm publish
 	git tag v$(CURRENT_VERSION)
 	git push --tags
+	git push
