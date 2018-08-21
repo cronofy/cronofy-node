@@ -212,7 +212,11 @@ cronofy.prototype.elevatedPermissions = function () {
 cronofy.prototype.freeBusy = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
-  return this._httpGet(details.options.next_page || '/v1/free_busy', details.options, details.callback);
+  if (details.options.next_page) {
+    return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
+  }
+
+  return this._httpGet('/v1/free_busy', details.options, details.callback);
 };
 
 cronofy.prototype.listCalendars = function () {
