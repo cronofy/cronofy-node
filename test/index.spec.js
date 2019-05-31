@@ -394,3 +394,173 @@ describe('Smart Invites', function () {
     });
   });
 });
+
+describe('Availability Rules', function () {
+  it('can upsert a rule', function (done) {
+    var availabilityRuleRequest = {
+      'availability_rule_id': 'default',
+      'tzid': 'America/Chicago',
+      'calendar_ids': [
+        'cal_n23kjnwrw2_jsdfjksn234'
+      ],
+      'weekly_periods': [
+        {
+          'day': 'monday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        },
+        {
+          'day': 'wednesday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        }
+      ]
+    };
+
+    var availabilityRuleResponse = {
+      'availability_rule_id': 'default',
+      'tzid': 'America/Chicago',
+      'calendar_ids': [
+        'cal_n23kjnwrw2_jsdfjksn234'
+      ],
+      'weekly_periods': [
+        {
+          'day': 'monday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        },
+        {
+          'day': 'wednesday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        }
+      ]
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/v1/availability_rules', availabilityRuleRequest)
+      .reply(200, availabilityRuleResponse);
+
+    api.upsertAvailabilityRule(_.cloneDeep(availabilityRuleRequest), function (_, result) {
+      expect(result).to.deep.equal(availabilityRuleResponse);
+      done();
+    });
+  });
+
+  it('can read a rule', function (done) {
+    var availabilityRuleId = 'default';
+    var availabilityRuleResponse = {
+      'availability_rule_id': availabilityRuleId,
+      'tzid': 'America/Chicago',
+      'calendar_ids': [
+        'cal_n23kjnwrw2_jsdfjksn234'
+      ],
+      'weekly_periods': [
+        {
+          'day': 'monday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        },
+        {
+          'day': 'wednesday',
+          'start_time': '09:30',
+          'end_time': '12:30'
+        }
+      ]
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/availability_rules/' + availabilityRuleId)
+      .reply(200, availabilityRuleResponse);
+
+    api.readAvailabilityRule(availabilityRuleId, function (_, result) {
+      expect(result).to.deep.equal(availabilityRuleResponse);
+      done();
+    });
+  });
+
+  it('can delete a rule', function (done) {
+    var availabilityRuleId = 'default';
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .delete('/v1/availability_rules', { 'availability_rule_id': availabilityRuleId })
+      .reply(202);
+
+    api.deleteAvailabilityRule({ 'availability_rule_id': availabilityRuleId }, function (_, result) {
+      done();
+    });
+    nock.isDone();
+  });
+
+  it('can list rules', function (done) {
+    var availabilityRulesResponse = [
+      {
+        'availability_rule_id': 'default',
+        'tzid': 'America/Chicago',
+        'calendar_ids': [
+          'cal_n23kjnwrw2_jsdfjksn234'
+        ],
+        'weekly_periods': [
+          {
+            'day': 'monday',
+            'start_time': '09:30',
+            'end_time': '12:30'
+          },
+          {
+            'day': 'wednesday',
+            'start_time': '09:30',
+            'end_time': '12:30'
+          }
+        ]
+      },
+      {
+        'availability_rule_id': 'special',
+        'tzid': 'America/New_York',
+        'calendar_ids': [
+          'cal_n23kjnwrw2_jsdfjksn234'
+        ],
+        'weekly_periods': [
+          {
+            'day': 'monday',
+            'start_time': '09:30',
+            'end_time': '12:30'
+          },
+          {
+            'day': 'tuesday',
+            'start_time': '09:30',
+            'end_time': '12:30'
+          }
+        ]
+      }
+    ];
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/availability_rules')
+      .reply(200, availabilityRulesResponse);
+
+    api.listAvailabilityRules(function (_, result) {
+      expect(result).to.deep.equal(availabilityRulesResponse);
+      done();
+    });
+  });
+});
