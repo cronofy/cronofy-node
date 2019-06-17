@@ -167,6 +167,30 @@ cronofy.prototype.sequencedAvailability = function () {
   return this._httpPost('/v1/sequenced_availability', details.options, details.callback);
 };
 
+cronofy.prototype.listAvailabilityRules = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpGet('/v1/availability_rules', details.options, details.callback);
+};
+
+cronofy.prototype.upsertAvailabilityRule = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/availability_rules', details.options, details.callback);
+};
+
+cronofy.prototype.readAvailabilityRule = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/availability_rules/' + details.options.availability_rule_id, details.options, details.callback);
+};
+
+cronofy.prototype.deleteAvailabilityRule = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpDelete('/v1/availability_rules/' + details.options.availability_rule_id, details.options, details.callback);
+};
+
 cronofy.prototype.createEvent = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 

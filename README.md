@@ -207,3 +207,42 @@ Takes options object and an optional callback, either returning a promise for, o
   - **url** - optional - The event's URL.
   - **reminders** - optional - The event's reminders.
   - **transparency** - optional - The event's transparency.
+
+### listAvailabilityRules(options, callback)
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full response details in the [List Availability Rules documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/list-availability-rules/)
+
+### upsertAvailabilityRule()
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See the full options in the [Upsert Availability Rule documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/upsert-availability-rule/)
+
+#### Options Object
+
+- **availability_rule_id** - The ID of the rule you wish to update (or create).
+- **tzid** - The timezone ID of the rule. A `String` representing a known time zone identifier from the IANA Time Zone Database.
+- **calendar_ids** - optional - An `Array` specifying the calendars that should impact the user’s availability. When provided at least one calendar must be specified.
+- **weekly_periods** - required - An `Array` of [weekly recurring periods](https://docs.cronofy.com/developers/api/scheduling/availability-rules/upsert-availability-rule/#weekly_periods) for the availability rule.
+
+### readAvailabilityRule()
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full response details in the [List Availability Rules documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/list-availability-rules/)
+
+#### Options Object
+
+- **availability_rule_id** - required - The `String` that uniquely identifies the availability rule. The first request made for an availability_rule_id will create an available period for the account and subsequent requests will update its details. More info can be found in the [Read Availability Rule documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/read-availability-rule/)
+
+### deleteAvailabilityRule()
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Delete Availability Rule documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/delete-availability-rule/)
+
+#### Options Object
+
+- **availability_rule_id** - required - The `String` that uniquely identifies the availability rule.
