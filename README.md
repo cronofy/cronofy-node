@@ -41,7 +41,7 @@ The cronofy client object can be initialized with client and token details. Thes
 
 ## Functions available
 
-### accountInformation([callback])
+### accountInformation(callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with an object containing the account information.
 
@@ -58,7 +58,7 @@ Takes an optional callback, either returning a promise for, or calling the provi
 }
 ```
 
-### createEvent(options[, callback])
+### createEvent(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 
@@ -73,7 +73,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **end** - required - The end time of the event as an ISO string.
  - **location** - An object containing a single key of 'description', whos value is a string of the event location.
 
-### deleteEvent(options,[, callback])
+### deleteEvent(options, callback)
 
 Returns an empty string/promise for an empty string on success.
 
@@ -82,7 +82,7 @@ Returns an empty string/promise for an empty string on success.
  - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **event_id** - required - An id for the event you want to delete.
 
-### bulkDeleteEvents(options,[, callback])
+### bulkDeleteEvents(options, callback)
 
 Returns an empty string/promise for an empty string on success.
 
@@ -91,7 +91,7 @@ Returns an empty string/promise for an empty string on success.
  - **calendar_ids** - optional - An Array of calendar ids to delete events from.
  - **delete_all** - optional - A Boolean value indicating if all events should be deleted.
 
-### freeBusy(options[, callback])
+### freeBusy(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with a list of free/busy information across all calendars.
 
@@ -100,15 +100,15 @@ Takes options object and an optional callback, either returning a promise for, o
  - **from** - required - the state date/time as an ISO string.
  - **to** - required - the end date/time as an ISO string.
 
-### listCalendars([callback])
+### listCalendars(callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with a list of calendars for the user.
 
-### profileInformation([callback])
+### profileInformation(callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with an array of the user's calendar profiles.
 
-### readEvents(options[, callback])
+### readEvents(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an array of the user's events accross all calendars.
 
@@ -119,11 +119,11 @@ Takes options object and an optional callback, either returning a promise for, o
 - **tzid** - the timezone id for the query.
 - **next_page** - url for the next page. This will still apply other options to the request.
 
-### refreshAccessToken(options[, callback])
+### refreshAccessToken(options, callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with the new refresh and access token information.
 
-### requestAccessToken(options[, callback])
+### requestAccessToken(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object containing an access and refresh token for you to use with future requests.
 
@@ -132,11 +132,11 @@ Takes options object and an optional callback, either returning a promise for, o
  - **code** - required - The short-lived, single-use code issued to you when the user authorized your access to their account as part of an Authorization Request.
  - **redirect_uri** - required - The same HTTP or HTTPS URI you passed when requesting the user's authorization.
 
-### revokeAuthorization([callback])
+### revokeAuthorization(callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 
-### deleteExternalEvent(options[, callback])
+### deleteExternalEvent(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 
@@ -145,7 +145,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **calendar_id** - required - the id of the calendar that the event will be deleted from.
  - **event_uid** - required - An id for the external event you want to delete.
 
-### elevatedPermissions(options[, callback])
+### elevatedPermissions(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object containing a permissions URL with a token
 
@@ -154,7 +154,7 @@ Takes options object and an optional callback, either returning a promise for, o
  - **permissions** - required - An array of objects with a calendar_id and permission_level
  - **redirect_uri** - required - Url to redirect the user to in order to grant or reject requested access
 
-### authorizeWithServiceAccount(options[, callback])
+### authorizeWithServiceAccount(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 
@@ -166,7 +166,7 @@ Takes options object and an optional callback, either returning a promise for, o
 
 ## Push Notification Methods
 
-### createNotificationChannel(options,[, callback])
+### createNotificationChannel(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object with the new channel details.
 
@@ -174,7 +174,7 @@ Takes options object and an optional callback, either returning a promise for, o
 
 - **callback_url** - required - The HTTP or HTTPS URL you wish to receive push notifications. Must not be longer than 128 characters and should be HTTPS.
 
-### deleteNotificationChannel(options[, callback])
+### deleteNotificationChannel(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
 
@@ -182,11 +182,11 @@ Takes options object and an optional callback, either returning a promise for, o
 
 - **channel_id** - The id of the channel you wish to close.
 
-### listNotificationChannels([callback])
+### listNotificationChannels(callback)
 
 Takes an optional callback, either returning a promise for, or calling the provided callback with a list of notification channels.
 
-### addToCalendar(options[, callback])
+### addToCalendar(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or caling the provided callback with a URL to redirect the user towards
 
@@ -214,7 +214,7 @@ Takes options object and an optional callback, either returning a promise or cal
 
 See full response details in the [List Availability Rules documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/list-availability-rules/)
 
-### upsertAvailabilityRule()
+### upsertAvailabilityRule(options, callback)
 
 Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
 
@@ -227,7 +227,7 @@ See the full options in the [Upsert Availability Rule documentation](https://doc
 - **calendar_ids** - optional - An `Array` specifying the calendars that should impact the user’s availability. When provided at least one calendar must be specified.
 - **weekly_periods** - required - An `Array` of [weekly recurring periods](https://docs.cronofy.com/developers/api/scheduling/availability-rules/upsert-availability-rule/#weekly_periods) for the availability rule.
 
-### readAvailabilityRule()
+### readAvailabilityRule(options, callback)
 
 Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
 
@@ -237,7 +237,7 @@ See full response details in the [List Availability Rules documentation](https:/
 
 - **availability_rule_id** - required - The `String` that uniquely identifies the availability rule. The first request made for an availability_rule_id will create an available period for the account and subsequent requests will update its details. More info can be found in the [Read Availability Rule documentation](https://docs.cronofy.com/developers/api/scheduling/availability-rules/read-availability-rule/)
 
-### deleteAvailabilityRule()
+### deleteAvailabilityRule(options, callback)
 
 Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
 
