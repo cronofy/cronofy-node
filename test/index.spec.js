@@ -480,10 +480,10 @@ describe('Availability Rules', function () {
         'Content-Type': 'application/json'
       }
     })
-      .get('/v1/availability_rules/' + availabilityRuleId)
+      .post('/v1/availability_rules/' + availabilityRuleId)
       .reply(200, availabilityRuleResponse);
 
-    api.readAvailabilityRule(availabilityRuleId, function (_, result) {
+    api.readAvailabilityRule({ 'availability_rule_id': availabilityRuleId }, function (_, result) {
       expect(result).to.deep.equal(availabilityRuleResponse);
       done();
     });
