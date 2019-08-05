@@ -88,7 +88,7 @@ cronofy.prototype._httpCall = function (method, path, options, callback, options
 };
 
 cronofy.prototype._parseArguments = function (args, configDefaults) {
-  var parsed = {options: {}, callback: null};
+  var parsed = { options: {}, callback: null };
 
   if (args.length === 2) {
     parsed.options = args[0];
@@ -366,6 +366,22 @@ cronofy.prototype.cancelSmartInvite = function () {
   details.options.method = 'cancel';
 
   return this._httpPost('/v1/smart_invites', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
+};
+
+cronofy.prototype.userInfo = function () {
+  var details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpGet('/v1/userinfo', details.options, details.callback);
+};
+
+cronofy.prototype.requestElementToken = function () {
+  var details = this._parseArguments(arguments, ['client_secret']);
+
+  details.options.bearer_token = details.options.client_secret;
+
+  details.options.version = '1';
+
+  return this._httpPost('/v1/element_tokens', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
 };
 
 module.exports = cronofy;

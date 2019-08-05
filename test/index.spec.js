@@ -49,6 +49,41 @@ describe('Get Account Information', function () {
       done();
     });
   });
+
+  it('returns userinfo', function (done) {
+    var accountResponse = {
+      'sub': 'acc_5700a00eb0ccd07000000000',
+      'email': 'janed@company.com',
+      'name': 'Jane Doe',
+      'zoneinfo': 'Europe/London',
+      'cronofy.type': 'account',
+      'cronofy.data': {
+        'authorization': {
+          'scope': 'read_write'
+        },
+        'profiles': [
+          {
+            'provider_name': 'google',
+            'profile_id': 'pro_n23kjnwrw2',
+            'profile_name': 'example@cronofy.com'
+          }
+        ]
+      }
+    };
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/userinfo')
+      .reply(200, accountResponse);
+
+    api.userInfo(function (_, result) {
+      expect(result).to.deep.equal(accountResponse);
+      done();
+    });
+  });
 });
 
 describe('accept encoding', function () {
