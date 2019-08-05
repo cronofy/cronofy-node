@@ -379,12 +379,9 @@ cronofy.prototype.requestElementToken = function () {
 
   details.options.bearer_token = details.options.client_secret;
 
-  return this._httpPost(
-    '/v1/element_tokens',
-    details.options,
-    details.callback,
-    ['access_token', 'client_secret', 'bearer_token']
-  );
+  details.options.version = "1";
+
+  return this._httpPost('/v1/element_tokens', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
 };
 
 module.exports = cronofy;
