@@ -384,4 +384,16 @@ cronofy.prototype.requestElementToken = function () {
   return this._httpPost('/v1/element_tokens', details.options, details.callback, ['access_token', 'client_secret', 'bearer_token']);
 };
 
+cronofy.prototype.listAccessibleCalendars = function () {
+  const details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpGet('/v1/accessible_calendars', details.options, details.callback);
+};
+
+cronofy.prototype.delegatedAuthorizations = function () {
+  const details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/delegated_authorizations', details.options, details.callback);
+};
+
 module.exports = cronofy;
