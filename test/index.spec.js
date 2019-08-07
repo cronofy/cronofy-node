@@ -599,3 +599,64 @@ describe('Availability Rules', function () {
     });
   });
 });
+
+describe('Business connect', function () {
+  it('lists accessible calendars', function (done) {
+    var calendarsResponse = {
+      'accessible_calendars': [
+        {
+          'calendar_type': 'resource',
+          'email': 'board-room-london@example.com',
+          'name': 'Board room (London)'
+        },
+        {
+          'calendar_type': 'unknown',
+          'email': 'jane.doe@example.com',
+          'name': 'Jane Doe'
+        },
+        {
+          'calendar_type': 'unknown',
+          'email': 'alpha.team@example.com',
+          'name': 'Alpha Team'
+        }
+      ]
+    };
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .get('/v1/accessible_calendars')
+      .reply(200, calendarsResponse);
+
+    api.listAccessibleCalendars(function (_, result) {
+      expect(result).to.deep.equal(calendarsResponse);
+      done();
+    });
+  });
+
+  it('delegates authorizations', function (done) {
+    var delegatedAuthorizationsRequest = {
+      'profile_id': '{PROFILE_ID}',
+      'email': '{EMAIL_OF_ACCOUNT_TO_ACCESS}',
+      'callback_url': '{CALLBACK_URL}',
+      'scope': '{SCOPES}',
+      'state': '{STATE}'
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/v1/delegated_authorizations', delegatedAuthorizationsRequest)
+      .reply(202);
+
+    api.listAccessibleCalendars(_.cloneDeep(delegatedAuthorizationsRequest), function (_, result) {
+      done();
+    });
+    nock.isDone();
+  });
+});
