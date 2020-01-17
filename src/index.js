@@ -138,7 +138,7 @@ cronofy.prototype.addToCalendar = function () {
 };
 
 cronofy.prototype.realTimeScheduling = function () {
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+  var details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/real_time_scheduling', details.options, details.callback);
 };

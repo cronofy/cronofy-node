@@ -660,3 +660,38 @@ describe('Business connect', function () {
     nock.isDone();
   });
 });
+
+describe('Real-Time Scheduling', function () {
+  it('creates an RTS link', function (done) {
+    var RTSRequest = {
+      'oauth': {
+        'redirect_uri': 'REDIRECT_URI'
+      },
+      'event': {
+        'tzid': 'TZID'
+      },
+      'availability': 'AVAILABILITY'
+    };
+
+    var RTSResponse = {
+      'real_time_scheduling': {
+        'real_time_scheduling_id': 'sch_4353945880944395',
+        'url': '{REAL_TIME_SCHEDULING_URL}'
+      }
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/v1/real_time_scheduling', RTSRequest)
+      .reply(200, RTSResponse);
+
+    api.realTimeScheduling(_.cloneDeep(RTSRequest), function (_, result) {
+      expect(result).to.deep.equal(RTSResponse);
+      done();
+    });
+  });
+});
