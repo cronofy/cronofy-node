@@ -246,3 +246,9 @@ See full details in the [Delete Availability Rule documentation](https://docs.cr
 #### Options Object
 
 - **availability_rule_id** - required - The `String` that uniquely identifies the availability rule.
+
+### realTimeScheduling(options, callback)
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Real-Time Scheduling documentation](https://docs.cronofy.com/developers/api/scheduling/real-time-scheduling/)
