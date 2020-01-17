@@ -396,4 +396,10 @@ cronofy.prototype.delegatedAuthorizations = function () {
   return this._httpPost('/v1/delegated_authorizations', details.options, details.callback);
 };
 
+cronofy.prototype.batch = function () {
+  const details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/batch', details.options, details.callback);
+};
+
 module.exports = cronofy;
