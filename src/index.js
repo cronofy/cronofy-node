@@ -37,6 +37,22 @@ var omit = function (obj, props) {
   return res;
 };
 
+var clone = function (obj) {
+  if (!obj || typeof obj !== 'object') {
+    return obj;
+  }
+
+  var res = obj.constructor();
+
+  for (var prop in obj) {
+    if (obj.hasOwnProperty(prop)) {
+      res[prop] = obj[prop];
+    }
+  }
+
+  return res;
+};
+
 cronofy.prototype._httpCall = function (method, path, options, callback, optionsToOmit) {
   var settings = {
     method: method,
@@ -91,12 +107,12 @@ cronofy.prototype._parseArguments = function (args, configDefaults) {
   var parsed = { options: {}, callback: null };
 
   if (args.length === 2) {
-    parsed.options = args[0];
+    parsed.options = clone(args[0]);
     parsed.callback = args[1];
   } else {
     switch (typeof args[0]) {
       case 'object':
-        parsed.options = args[0];
+        parsed.options = clone(args[0]);
         break;
       case 'function':
         parsed.callback = args[0];
