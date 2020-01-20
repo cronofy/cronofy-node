@@ -695,3 +695,62 @@ describe('Real-Time Scheduling', function () {
     });
   });
 });
+
+describe('Batch', function () {
+  it('batches requests', function (done) {
+    var bacthRequest = {
+      'batch': [
+        {
+          'method': 'DELETE',
+          'relative_url': '/v1/calendars/cal_123_abc/events',
+          'data': {
+            'event_id': '456'
+          }
+        },
+        {
+          'method': 'POST',
+          'relative_url': '/v1/calendars/cal_123_abc/events',
+          'data': {
+            'event_id': 'qTtZdczOccgaPncGJaCiLg',
+            'description': 'Discuss plans for the next quarter.',
+            'start': '2014-08-05T15:30:00Z',
+            'end': '2014-08-05T17:00:00Z',
+            'location': {
+              'description': 'Board room'
+            }
+          }
+        }
+      ]
+    };
+
+    var batchResponse = {
+      'batch': [
+        { 'status': 202 },
+        {
+          'status': 422,
+          'data': {
+            'errors': {
+              'summary': [
+                { 'key': 'errors.required', 'description': 'summary must be specified' }
+              ]
+            }
+          }
+        }
+      ]
+    };
+
+    nock('https://api.cronofy.com', {
+      reqheaders: {
+        'Authorization': 'Bearer ' + api.config.access_token,
+        'Content-Type': 'application/json'
+      }
+    })
+      .post('/v1/batch', bacthRequest)
+      .reply(207, batchResponse);
+
+    api.batch(_.cloneDeep(bacthRequest), function (_, result) {
+      expect(result).to.deep.equal(batchResponse);
+      done();
+    });
+  });
+});
