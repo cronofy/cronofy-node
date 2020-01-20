@@ -140,6 +140,8 @@ cronofy.prototype.addToCalendar = function () {
 cronofy.prototype.realTimeScheduling = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
+  details.options.bearer_token = details.options.client_secret;
+
   return this._httpPost('/v1/real_time_scheduling', details.options, details.callback);
 };
 
