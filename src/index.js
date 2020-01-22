@@ -138,9 +138,11 @@ cronofy.prototype.addToCalendar = function () {
 };
 
 cronofy.prototype.realTimeScheduling = function () {
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+  var details = this._parseArguments(arguments, ['client_secret']);
 
-  return this._httpPost('/v1/real_time_scheduling', details.options, details.callback);
+  details.options.bearer_token = details.options.client_secret;
+
+  return this._httpPost('/v1/real_time_scheduling', details.options, details.callback, ['client_secret', 'bearer_token']);
 };
 
 cronofy.prototype.realTimeSequencing = function () {
@@ -394,6 +396,12 @@ cronofy.prototype.delegatedAuthorizations = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/delegated_authorizations', details.options, details.callback);
+};
+
+cronofy.prototype.batch = function () {
+  const details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/batch', details.options, details.callback, ['access_token']);
 };
 
 module.exports = cronofy;

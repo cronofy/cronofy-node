@@ -246,3 +246,35 @@ See full details in the [Delete Availability Rule documentation](https://docs.cr
 #### Options Object
 
 - **availability_rule_id** - required - The `String` that uniquely identifies the availability rule.
+
+### realTimeScheduling(options, callback)
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Real-Time Scheduling documentation](https://docs.cronofy.com/developers/api/scheduling/real-time-scheduling/)
+
+#### Options Object
+
+- **oauth.redirect_uri** - required - The HTTP or HTTPS URI you wish the user to be redirected to after their Real-Time Scheduling journey.
+- **event** - required - An object with the details of the event you wish to push into the user’s selected calendar. Details of what parameters this object can hold can be found in the create or update event documentation.
+- **event.tzid** - required - The timezone to render the event with. The start and end parameters should be omited.
+- **availability** - required - An object with the details of the availability query used to determine the available time periods for the user to choose for the event’s date and time. Details of what parameters this object can hold can be found in the [Availability](https://docs.cronofy.com/developers/api/scheduling/availability/) documentation.
+- **target_calendars** - optional - An array of Cronofy IDs and calendar ids into which the final event will be inserted.
+- **formatting.hour_format** - optional - A `String` of either `h` (12-hour format) or `H` (24-hour format). If omitted then the hour format to use will be determined by Cronofy.
+- **callback_url** - optional - A URL to call when the full event details are known.
+- **redirect_urls.completed_url** - optional - A URL to redirect the user to when the user has completed the process and chosen a slot. A query string parameter of `token` will be added to this URL. The `token` can be used to retrieve the [current status](https://docs.cronofy.com/developers/api/scheduling/real-time-scheduling/status/) of a Real Time Scheduling link.
+- **availability.start_interval** - optional - A `Duration` describing the frequency that a sequence can start on. [More details in the documentation](https://docs.cronofy.com/developers/api/scheduling/real-time-scheduling/#availability.start_interval).
+- **minimum_notice** - optional - A `Duration`. No slots starting before the period described after the current time will be displayed to the user when they select slots.
+
+### batch(options, callback)
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Batch](https://docs.cronofy.com/developers/api/batch/)
+
+#### Options Object
+
+- **batch** - required - An array of up to 50 requests that form part of the batch.
+- **batch.method** - required - A `String` for the HTTP method of the individual request. Maps directly from its main documentation.
+- **batch.relative_url** - required - A `String` for the relative URL (sometimes referred to as the path and query string) of the individual request. Maps directly from its main documentation.
+- **batch.data** - required - An object containing the body parameters of the request. Maps directly from its main documentation. Note that this is an object, not a JSON-encoded string.
