@@ -420,4 +420,10 @@ cronofy.prototype.batch = function () {
   return this._httpPost('/v1/batch', details.options, details.callback, ['access_token']);
 };
 
+cronofy.prototype.conferencingServiceAuthorizations = function () {
+  const details = this._parseArguments(arguments, ['access_token']);
+
+  return this._httpPost('/v1/conferencing_service_authorizations', details.options, details.callback);
+};
+
 module.exports = cronofy;
