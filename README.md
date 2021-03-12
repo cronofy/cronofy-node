@@ -15,7 +15,8 @@ var cronofyClient = new Cronofy({
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
   client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf',
   access_token: 'aLUj9bRInSj1n08pHPAo5ru0OOppDaCO',
-  refresh_token: '5hdSBZHgjA4xcQAelyAYWDfezZv0-9yP'
+  refresh_token: '5hdSBZHgjA4xcQAelyAYWDfezZv0-9yP',
+  data_center: 'de'
 });
 
 var options = {
@@ -38,6 +39,8 @@ cronofyClient.requestAccessToken(options, function(err, response){
 ### Parameters Note
 
 The cronofy client object can be initialized with client and token details. These details will be automatically added to each call that they are needed for, but these values can be replaced by any specified in the method's `options` object.
+
+`data_center` is the two-letter designation for the data center you want to operate against - for example `de` for Germany, or `au` for Australia. When omitted, this defaults to the US data center.
 
 ## Functions available
 
