@@ -40,7 +40,7 @@ cronofyClient.requestAccessToken(options, function(err, response){
 
 The cronofy client object can be initialized with client and token details. These details will be automatically added to each call that they are needed for, but these values can be replaced by any specified in the method's `options` object.
 
-`data_center` is the two-letter designation for the data center you want to operate against - for example `de` for Germany, or `au` for Australia. When omitted, this defaults to the US data center. You can find the designation on your app's dashboard under `SDK Identifier`. 
+`data_center` is the two-letter designation for the data center you want to operate against - for example `de` for Germany, or `au` for Australia. When omitted, this defaults to the US data center. You can find this value on your app's dashboard under `SDK identifier`. 
 
 ## Functions available
 
