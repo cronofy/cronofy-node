@@ -281,3 +281,12 @@ See full details in the [Batch](https://docs.cronofy.com/developers/api/batch/)
 - **batch.method** - required - A `String` for the HTTP method of the individual request. Maps directly from its main documentation.
 - **batch.relative_url** - required - A `String` for the relative URL (sometimes referred to as the path and query string) of the individual request. Maps directly from its main documentation.
 - **batch.data** - required - An object containing the body parameters of the request. Maps directly from its main documentation. Note that this is an object, not a JSON-encoded string.
+
+## A feature I want is not in the SDK, how do I get it?
+
+We add features to this SDK as they are requested, to focus on developing the Cronofy API.
+
+If you're comfortable contributing support for an endpoint or attribute, then we love to receive pull requests!
+Please create a PR mentioning the feature/API endpoint you’ve added and we’ll review it as soon as we can.
+
+If you would like to request a feature is added by our team then please let us know by getting in touch via [support@cronofy.com](mailto:support@cronofy.com).
