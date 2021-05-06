@@ -17,8 +17,10 @@ var cronofy = function (config) {
 
   this.config = config;
 
+  var dc = config.data_center || config.dataCenter;
+
   this.urls = {
-    api: 'https://api' + (config.dataCenter ? '-' + config.dataCenter : '') + '.cronofy.com'
+    api: 'https://api' + (dc ? '-' + dc : '') + '.cronofy.com'
   };
 };
 
