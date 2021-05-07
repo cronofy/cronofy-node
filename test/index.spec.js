@@ -754,3 +754,36 @@ describe('Batch', function () {
     });
   });
 });
+
+describe('Data Center config property name normalization', function () {
+  it('allows data_center', function () {
+    var api = new Cronofy({
+      data_center: 'de'
+    });
+
+    expect(api.urls.api).to.eq('https://api-de.cronofy.com');
+  });
+
+  it('allows dataCenter', function () {
+    var api = new Cronofy({
+      dataCenter: 'de'
+    });
+
+    expect(api.urls.api).to.eq('https://api-de.cronofy.com');
+  });
+
+  it('prefers data_center', function () {
+    var api = new Cronofy({
+      data_center: 'de',
+      dataCenter: 'uk'
+    });
+
+    expect(api.urls.api).to.eq('https://api-de.cronofy.com');
+  });
+
+  it('uses US by default', function () {
+    var api = new Cronofy({});
+
+    expect(api.urls.api).to.eq('https://api.cronofy.com');
+  });
+});
