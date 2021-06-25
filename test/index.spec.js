@@ -791,32 +791,32 @@ describe('Data Center config property name normalization', function () {
 
 describe('HMAC validation', function () {
   it('verifies the correct HMAC', () => {
-    const result = api.hmacMatch({ hmac: '0g6bhIumRlRffctPXuASSl3u6AXOxnYRw+hiTp7IvTg=', body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: '0g6bhIumRlRffctPXuASSl3u6AXOxnYRw+hiTp7IvTg=', body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(true);
   });
 
   it('rejects the wrong HMAC', () => {
-    const result = api.hmacMatch({ hmac: 'something-else', body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: 'something-else', body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(false);
   });
 
   it('verifies the correct HMAC when one of the multiple HMACs splitted by "," match', () => {
-    const result = api.hmacMatch({ hmac: 'something-else,0g6bhIumRlRffctPXuASSl3u6AXOxnYRw+hiTp7IvTg=,38ArsN7+J/O8joGsgirVEdV16a/+eb+5QgHGIiuv4hk=', body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: 'something-else,0g6bhIumRlRffctPXuASSl3u6AXOxnYRw+hiTp7IvTg=,38ArsN7+J/O8joGsgirVEdV16a/+eb+5QgHGIiuv4hk=', body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(true);
   });
 
   it('rejects when multiple HMACs splitted by "," dont match', () => {
-    const result = api.hmacMatch({ hmac: 'something-else,38ArsN7+J/O8joGsgirVEdV16a/+eb+5QgHGIiuv4hk=', body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: 'something-else,38ArsN7+J/O8joGsgirVEdV16a/+eb+5QgHGIiuv4hk=', body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(false);
   });
 
   it('rejects if HMAC is null', () => {
-    const result = api.hmacMatch({ hmac: null, body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: null, body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(false);
   });
 
   it('rejects if HMAC is empty', () => {
-    const result = api.hmacMatch({ hmac: '', body: '{"example":"well-known"}' });
+    const result = api.hmacMatches({ hmac: '', body: '{"example":"well-known"}' });
     expect(result).to.deep.equal(false);
   });
 });
