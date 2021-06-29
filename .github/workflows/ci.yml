@@ -1,0 +1,28 @@
+name: CI
+on: push
+
+jobs:
+  sdk-ci:
+    name: "SDK CI"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        env:
+          cache-name: cronofy-node
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-js-${{ env.cache-name }}-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-js-${{ env.cache-name }}-
+            ${{ runner.os }}-js-
+            ${{ runner.os }}-
+
+      - name: CI
+        run: make ci
+
+

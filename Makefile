@@ -7,6 +7,8 @@ all: install
 install:
 	npm install
 
+ci: install test
+
 test:
 	npm test
 
