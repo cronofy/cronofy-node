@@ -4,10 +4,10 @@ CURRENT_VERSION:=$(shell jq ".version" -r package.json)
 
 all: install
 
+ci: install test
+
 install:
 	npm install
-
-ci: install test
 
 test:
 	npm test
