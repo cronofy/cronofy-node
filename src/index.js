@@ -2,6 +2,7 @@
 
 var request = require('request');
 var version = require('../package.json').version;
+var crypto = require('crypto');
 
 var tap = function (func) {
   return function (value) {
@@ -333,6 +334,16 @@ cronofy.prototype.refreshAccessToken = function () {
       details.callback(null, token);
     }
   }), details.callback);
+};
+
+cronofy.prototype.hmacValid = function () {
+  var details = this._parseArguments(arguments, ['hmac', 'body', 'client_secret']);
+  if (!details.options.hmac || details.options.hmac.length === 0) return false;
+
+  var calculated = crypto.createHmac('sha256', details.options.client_secret).update(details.options.body).digest('base64');
+  var hmacList = details.options.hmac.split(',');
+
+  return hmacList.includes(calculated);
 };
 
 cronofy.prototype.requestAccessToken = function () {
