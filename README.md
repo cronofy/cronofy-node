@@ -1,5 +1,3 @@
-# cronofy-node [![Build Status](https://travis-ci.org/cronofy/cronofy-node.svg?branch=master)](https://travis-ci.org/cronofy/cronofy-node)
-
 A simple wrapper for the [Cronofy API](https://www.cronofy.com/developers/api/).
 
 ## Basic Usage
