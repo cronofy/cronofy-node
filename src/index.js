@@ -336,7 +336,7 @@ cronofy.prototype.refreshAccessToken = function () {
   }), details.callback);
 };
 
-cronofy.prototype.hmacMatches = function () {
+cronofy.prototype.hmacValid = function () {
   var details = this._parseArguments(arguments, ['hmac', 'body', 'client_secret']);
   if (!details.options.hmac || details.options.hmac.length === 0) return false;
 
