@@ -202,7 +202,9 @@ cronofy.prototype.upsertAvailabilityRule = function () {
 cronofy.prototype.readAvailabilityRule = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
-  return this._httpPost('/v1/availability_rules/' + details.options.availability_rule_id, details.options, details.callback);
+  var availabilityRuleId = details.options.availability_rule_id;
+  delete details.options.availability_rule_id;
+  return this._httpGet('/v1/availability_rules/' + availabilityRuleId, details.options, details.callback);
 };
 
 cronofy.prototype.deleteAvailabilityRule = function () {

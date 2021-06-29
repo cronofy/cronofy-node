@@ -515,13 +515,14 @@ describe('Availability Rules', function () {
         'Content-Type': 'application/json'
       }
     })
-      .post('/v1/availability_rules/' + availabilityRuleId)
+      .get('/v1/availability_rules/' + availabilityRuleId)
       .reply(200, availabilityRuleResponse);
 
     api.readAvailabilityRule({ 'availability_rule_id': availabilityRuleId }, function (_, result) {
       expect(result).to.deep.equal(availabilityRuleResponse);
       done();
     });
+    nock.isDone();
   });
 
   it('can delete a rule', function (done) {
