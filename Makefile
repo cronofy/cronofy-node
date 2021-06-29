@@ -1,14 +1,17 @@
-.PHONY: test
 
 CURRENT_VERSION:=$(shell jq ".version" -r package.json)
 
 all: install
 
-ci: install test
+.PHONY: ci
+ci:
+	npm ci
 
+.PHONY: install
 install:
 	npm install
 
+.PHONY: test
 test:
 	npm test
 
