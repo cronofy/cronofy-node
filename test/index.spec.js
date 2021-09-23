@@ -789,6 +789,38 @@ describe('Data Center config property name normalization', function () {
   });
 });
 
+describe('Data Center value normalization', function () {
+  it('defaults to the US datacenter', function () {
+    var api = new Cronofy({});
+
+    expect(api.urls.api).to.eq('https://api.cronofy.com');
+  });
+
+  it('appends the data_center to the URI', function () {
+    var api = new Cronofy({
+      data_center: 'de'
+    });
+
+    expect(api.urls.api).to.eq('https://api-de.cronofy.com');
+  });
+
+  it('appends the lowercased version of the data_center to the URI', function () {
+    var api = new Cronofy({
+      data_center: 'DE'
+    });
+
+    expect(api.urls.api).to.eq('https://api-de.cronofy.com');
+  });
+
+  it('does not append anything for the value "us"', function () {
+    var api = new Cronofy({
+      data_center: 'us'
+    });
+
+    expect(api.urls.api).to.eq('https://api.cronofy.com');
+  });
+});
+
 describe('HMAC validation', function () {
   it('verifies the correct HMAC', () => {
     const result = api.hmacValid({ hmac: '0g6bhIumRlRffctPXuASSl3u6AXOxnYRw+hiTp7IvTg=', body: '{"example":"well-known"}' });

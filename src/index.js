@@ -20,6 +20,13 @@ var cronofy = function (config) {
 
   var dc = config.data_center || config.dataCenter;
 
+  if (dc) {
+    dc = dc.toLowerCase();
+    if (dc === 'us') {
+      dc = '';
+    }
+  }
+
   this.urls = {
     api: 'https://api' + (dc ? '-' + dc : '') + '.cronofy.com'
   };
