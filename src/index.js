@@ -204,6 +204,10 @@ cronofy.prototype.availablePeriods = function() {
 cronofy.prototype.listAvailablePeriods = function() {
   var details = this._parseArguments(arguments, ['access_token']);
 
+  if (details.options.next_page) {
+    return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
+  }
+
   return this._httpGet('/v1/available_periods', details.options, details.callback);
 }
 
