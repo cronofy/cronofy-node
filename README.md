@@ -189,7 +189,7 @@ Takes an optional callback, either returning a promise for, or calling the provi
 
 ### addToCalendar(options, callback)
 
-Takes options object and an optional callback, either returning a promise for, or caling the provided callback with a URL to redirect the user towards
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with a URL to redirect the user towards
 
 #### Options Object
 
@@ -208,6 +208,8 @@ Takes options object and an optional callback, either returning a promise for, o
   - **url** - optional - The event's URL.
   - **reminders** - optional - The event's reminders.
   - **transparency** - optional - The event's transparency.
+
+## Managed Availability methods
 
 ### listAvailabilityRules(options, callback)
 
@@ -247,6 +249,29 @@ See full details in the [Delete Availability Rule documentation](https://docs.cr
 #### Options Object
 
 - **availability_rule_id** - required - The `String` that uniquely identifies the availability rule.
+
+### upsertAvailablePeriod(options, callback)
+
+Creates or updates an Available Period for the authenticated account. Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Create or Update Available Periods documentation](https://docs.cronofy.com/developers/api/scheduling/available-periods/upsert/)
+### listAvailablePeriods(options, callback)
+
+Lists Available Periods for the authenticated account. Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Read Available Periods documentation](https://docs.cronofy.com/developers/api/scheduling/available-periods/read/)
+
+### deleteAvailablePeriods(options, callback)
+
+Deletes a single Available Period for the authenticated account, or deletes _all_ Available Periods for the authenticated account.
+#### Options Object
+
+Provide either:
+- **available_period_id** - The `String` that uniquely identifies the Available Period to delete.
+
+, or:
+
+- **delete_all** - set to `true` to bulk delete all Available Periods for the account.
 
 ### realTimeScheduling(options, callback)
 
