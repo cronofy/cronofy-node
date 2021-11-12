@@ -195,7 +195,7 @@ cronofy.prototype.sequencedAvailability = function () {
   return this._httpPost('/v1/sequenced_availability', details.options, details.callback);
 };
 
-cronofy.prototype.availablePeriods = function() {
+cronofy.prototype.createAvailablePeriod = function() {
   var details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/available_periods', details.options, details.callback);
