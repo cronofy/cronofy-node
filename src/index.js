@@ -195,13 +195,13 @@ cronofy.prototype.sequencedAvailability = function () {
   return this._httpPost('/v1/sequenced_availability', details.options, details.callback);
 };
 
-cronofy.prototype.createAvailablePeriod = function() {
+cronofy.prototype.upsertAvailablePeriod = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/available_periods', details.options, details.callback);
-}
+};
 
-cronofy.prototype.listAvailablePeriods = function() {
+cronofy.prototype.listAvailablePeriods = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
   if (details.options.next_page) {
@@ -209,13 +209,13 @@ cronofy.prototype.listAvailablePeriods = function() {
   }
 
   return this._httpGet('/v1/available_periods', details.options, details.callback);
-}
+};
 
-cronofy.prototype.deleteAvailablePeriods = function() {
+cronofy.prototype.deleteAvailablePeriods = function () {
   var details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/available_periods', details.options, details.callback);
-}
+};
 
 cronofy.prototype.listAvailabilityRules = function () {
   var details = this._parseArguments(arguments, ['access_token']);
