@@ -1,3 +1,7 @@
+# [v3.5.2]
+
+* Adds support for Available Period endpoints [#85], [#86] - thanks @tia-svazquez!
+
 # [v3.5.1]
 
 * Normalize the value of `data_center`, including fallback when passed the value `us` [#83]
@@ -16,3 +20,5 @@
 [#78]: https://github.com/cronofy/cronofy-node/issues/78
 [#79]: https://github.com/cronofy/cronofy-node/pull/79
 [#83]: https://github.com/cronofy/cronofy-node/pull/83
+[#85]: https://github.com/cronofy/cronofy-node/pull/85
+[#86]: https://github.com/cronofy/cronofy-node/pull/86
