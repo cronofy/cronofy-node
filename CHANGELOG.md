@@ -1,3 +1,7 @@
+# [v3.6.0]
+
+* Adds support for Update External events [#87]- thanks again @tia-svazquez!
+
 # [v3.5.2]
 
 * Adds support for Available Period endpoints [#85], [#86] - thanks @tia-svazquez!
@@ -13,6 +17,7 @@
 * Update dev dependencies and CI
 
 
+[v3.6.0]: https://github.com/cronofy/cronofy-node/tag/v3.6.0
 [v3.5.1]: https://github.com/cronofy/cronofy-node/tag/v3.5.1
 [v3.5.0]: https://github.com/cronofy/cronofy-node/tag/v3.5.0
 
@@ -22,3 +27,4 @@
 [#83]: https://github.com/cronofy/cronofy-node/pull/83
 [#85]: https://github.com/cronofy/cronofy-node/pull/85
 [#86]: https://github.com/cronofy/cronofy-node/pull/86
+[#87]: https://github.com/cronofy/cronofy-node/pull/87
