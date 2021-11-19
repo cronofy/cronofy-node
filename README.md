@@ -296,7 +296,7 @@ See full details in the [Real-Time Scheduling documentation](https://docs.cronof
 
 Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
 
-See full details in the [Batch](https://docs.cronofy.com/developers/api/batch/)
+See full details in the [Batch documentation](https://docs.cronofy.com/developers/api/batch/).
 
 #### Options Object
 
@@ -304,6 +304,12 @@ See full details in the [Batch](https://docs.cronofy.com/developers/api/batch/)
 - **batch.method** - required - A `String` for the HTTP method of the individual request. Maps directly from its main documentation.
 - **batch.relative_url** - required - A `String` for the relative URL (sometimes referred to as the path and query string) of the individual request. Maps directly from its main documentation.
 - **batch.data** - required - An object containing the body parameters of the request. Maps directly from its main documentation. Note that this is an object, not a JSON-encoded string.
+
+### updateExternalEvent(options, callback)
+
+Allows the editing of external events on accounts which have granted [Extended Permissions](https://docs.cronofy.com/developers/api/authorization/extended-permissions/)
+
+See full details in the [Update External Event documentation](https://docs.cronofy.com/developers/api/events/edit-external-events/).
 
 ## A feature I want is not in the SDK, how do I get it?
 
