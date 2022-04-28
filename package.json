@@ -1,40 +1,35 @@
 {
-    "name": "cronofy",
-    "version": "3.6.0",
-    "description": "A simple wrapper for the Cronofy API",
-    "main": "./src/index.js",
-    "scripts": {
-        "prepublish": "npm test",
-        "test": "semistandard && mocha",
-        "start": "node ./src/index.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cronofy/cronofy-node.git"
-    },
-    "keywords": [
-        "cronofy",
-        "api"
-    ],
-    "author": "Brett Warner <brett@warbrett.com> (www.warbrett.com)",
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/cronofy/cronofy-node/issues"
-    },
-    "homepage": "https://github.com/cronofy/cronofy-node#readme",
-    "dependencies": {
-        "request": "^2.0.0"
-    },
-    "semistandard": {
-        "env": [
-            "mocha"
-        ]
-    },
-    "devDependencies": {
-        "chai": "^4.3.0",
-        "lodash": "^4.17.0",
-        "mocha": "^9.0.0",
-        "nock": "^13.0.0",
-        "semistandard": "^11.0.0"
-    }
+  "name": "cronofy",
+  "version": "3.7.0",
+  "description": "A simple wrapper for the Cronofy API",
+  "main": "./src/index.js",
+  "scripts": {
+    "prepublish": "npm test",
+    "test": "mocha",
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cronofy/cronofy-node-axios.git"
+  },
+  "keywords": [
+    "cronofy",
+    "api"
+  ],
+  "author": "Brett Warner <brett@warbrett.com> (www.warbrett.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cronofy/cronofy-node-axios/issues"
+  },
+  "homepage": "https://github.com/cronofy/cronofy-node-axios#readme",
+  "dependencies": {
+    "axios": "^0.27.0",
+    "qs": "^6.10.3"
+  },
+  "devDependencies": {
+    "chai": "^4.3.0",
+    "lodash": "^4.17.0",
+    "mocha": "^9.0.0",
+    "nock": "^13.0.0"
+  }
 }
