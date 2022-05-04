@@ -1,6 +1,6 @@
 # [v3.7.0]
 
-* Use Axios to replace Request that is deprecated [#91]- thanks @gl-aagostino!
+* Use Axios to replace Request that is deprecated [#90]- thanks @gl-aagostino!
 
 # [v3.6.0]
 
@@ -21,11 +21,11 @@
 * Update dev dependencies and CI
 
 
-[v3.7.0]: https://github.com/cronofy/cronofy-node/tag/v3.7.0
-[v3.6.0]: https://github.com/cronofy/cronofy-node/tag/v3.6.0
-[v3.5.1]: https://github.com/cronofy/cronofy-node/tag/v3.5.2
-[v3.5.1]: https://github.com/cronofy/cronofy-node/tag/v3.5.1
-[v3.5.0]: https://github.com/cronofy/cronofy-node/tag/v3.5.0
+[v3.7.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.0
+[v3.6.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.6.0
+[v3.5.2]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.2
+[v3.5.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.1
+[v3.5.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.0
 
 [#77]: https://github.com/cronofy/cronofy-node/pull/77
 [#78]: https://github.com/cronofy/cronofy-node/issues/78
@@ -34,3 +34,4 @@
 [#85]: https://github.com/cronofy/cronofy-node/pull/85
 [#86]: https://github.com/cronofy/cronofy-node/pull/86
 [#87]: https://github.com/cronofy/cronofy-node/pull/87
+[#90]: https://github.com/cronofy/cronofy-node/pull/90
