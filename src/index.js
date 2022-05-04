@@ -2,8 +2,8 @@
 
 var version = require('../package.json').version;
 var crypto = require('crypto');
-const axios = require("axios").default;
-const qs = require("qs");
+const axios = require('axios').default;
+const qs = require('qs');
 
 var tap = function (func) {
   return function (value) {
@@ -72,28 +72,28 @@ cronofy.prototype._httpCall = function (
   optionsToOmit
 ) {
   let data;
-  if (method === "GET") {
-    let qsParams = omit(options, optionsToOmit || ["access_token"]);
-    let qsString = qs.stringify(qsParams, { arrayFormat: "brackets" });
+  if (method === 'GET') {
+    let qsParams = omit(options, optionsToOmit || ['access_token']);
+    let qsString = qs.stringify(qsParams, { arrayFormat: 'brackets' });
     if (qsString) {
       path += `?${qsString}`;
     }
   } else {
-    data = omit(options, optionsToOmit || ["access_token"]);
+    data = omit(options, optionsToOmit || ['access_token']);
   }
 
   return new Promise((resolve, reject) => {
     axios({
       data,
       headers: {
-        "Accept-Encoding": "gzip, deflate",
+        'Accept-Encoding': 'gzip, deflate',
         Authorization:
-          "Bearer " + (options.access_token || options.bearer_token),
-        "Content-Type": "application/json",
-        "User-Agent": "Cronofy Node - " + version,
+          'Bearer ' + (options.access_token || options.bearer_token),
+        'Content-Type': 'application/json',
+        'User-Agent': 'Cronofy Node - ' + version
       },
       method,
-      url: path,
+      url: path
     })
       .then((result) => {
         if (callback) {
@@ -112,7 +112,7 @@ cronofy.prototype._httpCall = function (
 
           err.error = {
             url: path,
-            entity: error.response.data,
+            entity: error.response.data
           };
 
           if (callback) {
