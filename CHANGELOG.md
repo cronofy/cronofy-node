@@ -1,3 +1,7 @@
+# [v3.7.0]
+
+* Use Axios to replace Request that is deprecated [#91]- thanks @gl-aagostino!
+
 # [v3.6.0]
 
 * Adds support for Update External events [#87]- thanks again @tia-svazquez!
@@ -17,7 +21,9 @@
 * Update dev dependencies and CI
 
 
+[v3.7.0]: https://github.com/cronofy/cronofy-node/tag/v3.7.0
 [v3.6.0]: https://github.com/cronofy/cronofy-node/tag/v3.6.0
+[v3.5.1]: https://github.com/cronofy/cronofy-node/tag/v3.5.2
 [v3.5.1]: https://github.com/cronofy/cronofy-node/tag/v3.5.1
 [v3.5.0]: https://github.com/cronofy/cronofy-node/tag/v3.5.0
 
