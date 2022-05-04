@@ -1,6 +1,6 @@
 # [v3.7.0]
 
-* Use Axios to replace Request that is deprecated [#91]- thanks @gl-aagostino!
+* Use Axios to replace Request that is deprecated [#90]- thanks @gl-aagostino!
 
 # [v3.6.0]
 
@@ -34,3 +34,4 @@
 [#85]: https://github.com/cronofy/cronofy-node/pull/85
 [#86]: https://github.com/cronofy/cronofy-node/pull/86
 [#87]: https://github.com/cronofy/cronofy-node/pull/87
+[#90]: https://github.com/cronofy/cronofy-node/pull/90
