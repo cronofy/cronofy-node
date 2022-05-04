@@ -1,6 +1,6 @@
 {
     "name": "cronofy",
-    "version": "3.6.0",
+    "version": "3.7.0",
     "description": "A simple wrapper for the Cronofy API",
     "main": "./src/index.js",
     "scripts": {
@@ -23,7 +23,8 @@
     },
     "homepage": "https://github.com/cronofy/cronofy-node#readme",
     "dependencies": {
-        "request": "^2.0.0"
+        "axios": "^0.27.0",
+        "qs": "^6.10.3"
     },
     "semistandard": {
         "env": [

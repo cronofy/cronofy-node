@@ -1,8 +1,9 @@
 'use strict';
 
-var request = require('request');
 var version = require('../package.json').version;
 var crypto = require('crypto');
+const axios = require('axios').default;
+const qs = require('qs');
 
 var tap = function (func) {
   return function (value) {
@@ -63,53 +64,70 @@ var clone = function (obj) {
   return res;
 };
 
-cronofy.prototype._httpCall = function (method, path, options, callback, optionsToOmit) {
-  var settings = {
-    method: method,
-    url: path,
-    gzip: true,
-    json: true,
-    headers: {
-      Authorization: 'Bearer ' + (options.access_token || options.bearer_token),
-      'Content-Type': 'application/json',
-      'User-Agent': 'Cronofy Node - ' + version
-    },
-    qsStringifyOptions: { arrayFormat: 'brackets' }
-  };
-
+cronofy.prototype._httpCall = function (
+  method,
+  path,
+  options,
+  callback,
+  optionsToOmit
+) {
+  let data;
   if (method === 'GET') {
-    settings['qs'] = omit(options, optionsToOmit || ['access_token']);
+    let qsParams = omit(options, optionsToOmit || ['access_token']);
+    let qsString = qs.stringify(qsParams, { arrayFormat: 'brackets' });
+    if (qsString) {
+      path += `?${qsString}`;
+    }
   } else {
-    settings['body'] = omit(options, optionsToOmit || ['access_token']);
+    data = omit(options, optionsToOmit || ['access_token']);
   }
 
-  return new Promise(function (resolve, reject) {
-    request(settings, function (error, result, body) {
-      if (error || result.statusCode >= 400) {
-        var err = new Error(JSON.stringify(body));
-
-        if (result && result.statusCode) {
-          err.statusCode = result.statusCode;
-        }
-
-        err.error = {
-          url: path,
-          entity: body
-        };
-
+  return new Promise((resolve, reject) => {
+    axios({
+      data,
+      headers: {
+        'Accept-Encoding': 'gzip, deflate',
+        Authorization:
+          'Bearer ' + (options.access_token || options.bearer_token),
+        'Content-Type': 'application/json',
+        'User-Agent': 'Cronofy Node - ' + version
+      },
+      method,
+      url: path
+    })
+      .then((result) => {
         if (callback) {
-          callback(err);
+          callback(null, result.data);
         } else {
-          reject(err);
+          resolve(result.data);
         }
-      } else {
-        if (callback) {
-          callback(null, body);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status >= 400) {
+          var err = new Error(JSON.stringify(error.response.data));
+
+          if (error.response && error.response.status) {
+            err.statusCode = error.response.status;
+          }
+
+          err.error = {
+            url: path,
+            entity: error.response.data
+          };
+
+          if (callback) {
+            callback(err);
+          } else {
+            reject(err);
+          }
         } else {
-          resolve(body);
+          if (callback) {
+            callback(error);
+          } else {
+            reject(error);
+          }
         }
-      }
-    });
+      });
   });
 };
 
