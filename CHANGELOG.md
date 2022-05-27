@@ -1,3 +1,7 @@
+# [v3.7.1]
+
+* Update package description
+
 # [v3.7.0]
 
 * Use Axios to replace Request that is deprecated [#90]- thanks @gl-aagostino!
@@ -21,6 +25,7 @@
 * Update dev dependencies and CI
 
 
+[v3.7.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.1
 [v3.7.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.0
 [v3.6.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.6.0
 [v3.5.2]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.2
