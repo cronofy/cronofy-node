@@ -1,7 +1,7 @@
 {
     "name": "cronofy",
-    "version": "3.7.0",
-    "description": "A simple wrapper for the Cronofy API",
+    "version": "3.7.1",
+    "description": "SDK for Cronofy - the Scheduling Platform for Business",
     "main": "./src/index.js",
     "scripts": {
         "prepublish": "npm test",
