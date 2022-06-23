@@ -494,25 +494,25 @@ cronofy.prototype.conferencingServiceAuthorizations = function () {
   return this._httpPost('/v1/conferencing_service_authorizations', details.options, details.callback);
 };
 
-cronofy.prototype.create_bookable_event = function () {
+cronofy.prototype.createBookableEvent = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/bookable_events', details.options, details.callback);
 };
 
-cronofy.prototype.read_bookable_events = function () {
+cronofy.prototype.readBookableEvents = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/bookable_events' + '/' + details.options.bookable_event_id, details.options, details.callback);
 };
 
-cronofy.prototype.upsert_registration_bookable_event = function () {
+cronofy.prototype.upsertRegistrationBookableEvent = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/bookable_events' + '/' + details.options.bookable_event_id  + '/' + 'registrations', details.options, details.callback);
 };
 
-cronofy.prototype.delete_registration_bookable_event = function () {
+cronofy.prototype.deleteRegistrationBookableEvent = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/bookable_events'  + '/' + details.options.bookable_event_id  + '/' + 'registrations' + '/' + details.options.registration_id, details.options, details.callback);
