@@ -319,3 +319,32 @@ If you're comfortable contributing support for an endpoint or attribute, then we
 Please create a PR mentioning the feature/API endpoint you’ve added and we’ll review it as soon as we can.
 
 If you would like to request a feature is added by our team then please let us know by getting in touch via [support@cronofy.com](mailto:support@cronofy.com).
+
+
+### createBookableEvent(options, callback)
+
+Takes options object and an optional callback, either returning a promise or calling the provided callback with the body of the response (or error, if applicable).
+
+See full details in the [Bookable Event documentation](https://docs.cronofy.com/developers/api/scheduling/bookable-events/create/).
+
+#### Options Object
+
+ - **bookable_event_id** - required - the id of the bookable event that the event will be created.
+ - **start** - required - The start time for the event in UTC.
+ - **end** - required - The end time for the event in UTC.
+ - **status** - required - The status of the event, either `"confirmed"` or `"cancelled"`.
+ - **registration.capacity** - The maximum number of attendees that can register for the event.
+
+
+### readBookableEvent(options, callback)
+
+Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object representing the bookable event.
+
+#### Options Object
+
+ - **bookable_event_id** - required - the id of the bookable event that the event will be created.
+
+
+### upsertRegistrationBookableEvent(options, callback)
+
+
