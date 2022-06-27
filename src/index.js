@@ -509,13 +509,13 @@ cronofy.prototype.readBookableEvents = function () {
 cronofy.prototype.upsertRegistrationBookableEvent = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
-  return this._httpPost('/v1/bookable_events' + '/' + details.options.bookable_event_id  + '/' + 'registrations', details.options, details.callback);
+  return this._httpPost('/v1/bookable_events' + '/' + details.options.bookable_event_id + '/' + 'registrations', details.options, details.callback);
 };
 
 cronofy.prototype.deleteRegistrationBookableEvent = function () {
   const details = this._parseArguments(arguments, ['access_token']);
 
-  return this._httpDelete('/v1/bookable_events'  + '/' + details.options.bookable_event_id  + '/' + 'registrations' + '/' + details.options.registration_id, details.options, details.callback);
+  return this._httpDelete('/v1/bookable_events' + '/' + details.options.bookable_event_id + '/' + 'registrations' + '/' + details.options.registration_id, details.options, details.callback);
 };
 
 module.exports = cronofy;
