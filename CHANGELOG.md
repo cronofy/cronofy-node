@@ -1,3 +1,7 @@
+# [v3.8.0]
+
+* Add bookable events support [#95] - thanks @tia-hrodriguez
+
 # [v3.7.1]
 
 * Update package description
@@ -25,6 +29,7 @@
 * Update dev dependencies and CI
 
 
+[v3.8.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.0
 [v3.7.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.1
 [v3.7.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.0
 [v3.6.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.6.0
@@ -32,11 +37,12 @@
 [v3.5.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.1
 [v3.5.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.0
 
-[#77]: https://github.com/cronofy/cronofy-node/pull/77
-[#78]: https://github.com/cronofy/cronofy-node/issues/78
-[#79]: https://github.com/cronofy/cronofy-node/pull/79
-[#83]: https://github.com/cronofy/cronofy-node/pull/83
-[#85]: https://github.com/cronofy/cronofy-node/pull/85
-[#86]: https://github.com/cronofy/cronofy-node/pull/86
-[#87]: https://github.com/cronofy/cronofy-node/pull/87
+[#95]: https://github.com/cronofy/cronofy-node/pull/95
 [#90]: https://github.com/cronofy/cronofy-node/pull/90
+[#87]: https://github.com/cronofy/cronofy-node/pull/87
+[#86]: https://github.com/cronofy/cronofy-node/pull/86
+[#85]: https://github.com/cronofy/cronofy-node/pull/85
+[#83]: https://github.com/cronofy/cronofy-node/pull/83
+[#79]: https://github.com/cronofy/cronofy-node/pull/79
+[#78]: https://github.com/cronofy/cronofy-node/issues/78
+[#77]: https://github.com/cronofy/cronofy-node/pull/77
