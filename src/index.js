@@ -495,27 +495,46 @@ cronofy.prototype.conferencingServiceAuthorizations = function () {
 };
 
 cronofy.prototype.createBookableEvent = function () {
-  const details = this._parseArguments(arguments, ['access_token']);
+  var details = this._parseArguments(arguments, ['client_secret']);
+  details.options.bearer_token = details.options.client_secret;
 
-  return this._httpPost('/v1/bookable_events', details.options, details.callback);
+  return this._httpPost('/v1/bookable_events', details.options, details.callback, ['client_secret']);
 };
 
 cronofy.prototype.readBookableEvents = function () {
-  const details = this._parseArguments(arguments, ['access_token']);
+  var details = this._parseArguments(arguments, ['client_secret']);
+  details.options.bearer_token = details.options.client_secret;
 
-  return this._httpGet('/v1/bookable_events' + '/' + details.options.bookable_event_id, details.options, details.callback);
+  return this._httpGet(
+    '/v1/bookable_events/' + details.options.bookable_event_id,
+    details.options,
+    details.callback,
+    ['client_secret']
+  );
 };
 
 cronofy.prototype.upsertRegistrationBookableEvent = function () {
-  const details = this._parseArguments(arguments, ['access_token']);
+  var details = this._parseArguments(arguments, ['client_secret']);
+  details.options.bearer_token = details.options.client_secret;
 
-  return this._httpPost('/v1/bookable_events' + '/' + details.options.bookable_event_id + '/' + 'registrations', details.options, details.callback);
+  return this._httpPost(
+    '/v1/bookable_events/' + details.options.bookable_event_id + '/registrations',
+    details.options,
+    details.callback,
+    ['client_secret']
+  );
 };
 
 cronofy.prototype.deleteRegistrationBookableEvent = function () {
-  const details = this._parseArguments(arguments, ['access_token']);
+  var details = this._parseArguments(arguments, ['client_secret']);
+  details.options.bearer_token = details.options.client_secret;
 
-  return this._httpDelete('/v1/bookable_events' + '/' + details.options.bookable_event_id + '/' + 'registrations' + '/' + details.options.registration_id, details.options, details.callback);
+  return this._httpDelete(
+    '/v1/bookable_events/' + details.options.bookable_event_id + '/registrations/' + details.options.registration_id,
+    details.options,
+    details.callback,
+    ['client_secret']
+  );
 };
 
 module.exports = cronofy;
