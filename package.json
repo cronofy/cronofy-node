@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/cronofy/cronofy-node#readme",
     "dependencies": {
-        "axios": "^0.27.0",
+        "axios": "^1.6.0",
         "qs": "^6.10.3"
     },
     "semistandard": {
