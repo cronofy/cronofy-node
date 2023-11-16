@@ -1,6 +1,6 @@
 {
     "name": "cronofy",
-    "version": "3.8.0",
+    "version": "3.8.1",
     "description": "SDK for Cronofy - the Scheduling Platform for Business",
     "main": "./src/index.js",
     "scripts": {
@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/cronofy/cronofy-node#readme",
     "dependencies": {
-        "axios": "^0.27.0",
+        "axios": "^1.6.0",
         "qs": "^6.10.3"
     },
     "semistandard": {

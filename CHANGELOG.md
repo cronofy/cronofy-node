@@ -1,3 +1,7 @@
+# [v3.8.1]
+
+* Bump axios dependency to version 1.6.0
+
 # [v3.8.0]
 
 * Add bookable events support [#95] - thanks @tia-hrodriguez
