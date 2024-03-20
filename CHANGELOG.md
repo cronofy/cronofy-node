@@ -1,6 +1,10 @@
+# [v3.8.2]
+
+* Bump axios dependency to version 1.6.8 #[98]
+
 # [v3.8.1]
 
-* Bump axios dependency to version 1.6.0
+* Bump axios dependency to version 1.6.0 #[97]
 
 # [v3.8.0]
 
@@ -33,6 +37,8 @@
 * Update dev dependencies and CI
 
 
+[v3.8.2]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.2
+[v3.8.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.1
 [v3.8.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.0
 [v3.7.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.1
 [v3.7.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.7.0
@@ -41,6 +47,8 @@
 [v3.5.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.1
 [v3.5.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.0
 
+[#98]: https://github.com/cronofy/cronofy-node/pull/98
+[#97]: https://github.com/cronofy/cronofy-node/pull/97
 [#95]: https://github.com/cronofy/cronofy-node/pull/95
 [#90]: https://github.com/cronofy/cronofy-node/pull/90
 [#87]: https://github.com/cronofy/cronofy-node/pull/87
