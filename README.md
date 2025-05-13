@@ -182,10 +182,11 @@ Takes an optional callback, either returning a promise for, or calling the provi
 ### createNotificationChannel(options, callback)
 
 Takes options object and an optional callback, either returning a promise for, or calling the provided callback with an object with the new channel details.
+See full details in the [Create Notification Channel documentation](https://docs.cronofy.com/developers/api/push-notifications/create-channel/)
 
 #### Options Object
 
-- **callback_url** - required - The HTTP or HTTPS URL you wish to receive push notifications. Must not be longer than 128 characters and should be HTTPS.
+- **callback_url** - required - The HTTP or HTTPS URL you wish to receive push notifications. 
 
 ### deleteNotificationChannel(options, callback)
 
