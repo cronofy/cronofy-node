@@ -19,6 +19,9 @@ test:
 check_dependencies:
 	@command -v jq >/dev/null || (echo "jq not installed please install via homebrew - 'brew install jq'"; exit 1)
 
+.PHONY: publish
+publish: release
+
 .PHONY: release
 release: check_dependencies test
 	npm publish
