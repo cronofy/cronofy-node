@@ -1,3 +1,7 @@
+# [v3.8.4]
+
+* Bump axios dependency to version 1.12.0 #[107]
+
 # [v3.8.3]
 
 * Bump axios dependency to version 1.11.0 #[106]
