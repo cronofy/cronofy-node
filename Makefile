@@ -7,6 +7,9 @@ all: install
 ci: install
 	npm ci
 
+.PHONY: init
+init: install
+
 .PHONY: install
 install:
 	npm install
