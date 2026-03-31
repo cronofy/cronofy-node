@@ -1,0 +1,33 @@
+name: SDK Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: "cronofy-node"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: 'node_modules'
+          key: ${{ runner.os }}-cronofy-node-modules-${{ hashFiles('package-lock.json') }}
+
+      - name: Auth NPM
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.x
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+
+      - name: Publish
+        run: make publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
