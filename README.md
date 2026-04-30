@@ -6,10 +6,10 @@ The APIs should be one to one with the all of the current methods in [Cronofy's 
 
 #### Usage Example
 
-```node
-var Cronofy = require('cronofy');
+```javascript
+const Cronofy = require('cronofy');
 
-var cronofyClient = new Cronofy({
+const cronofyClient = new Cronofy({
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
   client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf',
   access_token: 'aLUj9bRInSj1n08pHPAo5ru0OOppDaCO',
@@ -17,21 +17,20 @@ var cronofyClient = new Cronofy({
   data_center: 'de'
 });
 
-var options = {
+const options = {
   code: 'asdkfj213sdf',
   redirect_uri: 'https://www.yoursite.com/calendar_redirect_page'
 };
 
-cronofyClient.requestAccessToken(options)
-  .then(function(response){
-    console.log(response);
-  });
+// Using async/await
+const response = await cronofyClient.requestAccessToken(options);
+console.log(response);
 
 // Alternatively as a callback
-cronofyClient.requestAccessToken(options, function(err, response){
-  if(err) throw err;
+cronofyClient.requestAccessToken(options, (err, response) => {
+  if (err) throw err;
   console.log(response);
-})
+});
 ```
 
 ### Parameters Note
