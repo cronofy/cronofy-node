@@ -1,19 +1,19 @@
-var expect = require('chai').expect;
-var nock = require('nock');
-var Cronofy = require('../src/index');
+const expect = require('chai').expect;
+const nock = require('nock');
+const Cronofy = require('../src/index');
 
-var api = new Cronofy({
+const api = new Cronofy({
   access_token: 'aLUj9bRInSj1n08pHPAo5ru0OOppDaCO'
 });
 
 describe('bulk delete from calendar', function () {
   it('deletes from the calendar', function (done) {
-    var response = { 'foo': 'bar' };
-    var calendarIds = [ 'cal_123', 'cal_456' ];
+    const response = { foo: 'bar' };
+    const calendarIds = ['cal_123', 'cal_456'];
 
     nock('https://api.cronofy.com', {
       reqheaders: {
-        'Authorization': 'Bearer ' + api.config.access_token,
+        Authorization: 'Bearer ' + api.config.access_token,
         'Content-Type': 'application/json'
       }
     })
@@ -31,11 +31,11 @@ describe('bulk delete from calendar', function () {
 
 describe('bulk delete from all', function () {
   it('deletes from the calendar', function (done) {
-    var response = { 'foo': 'bar' };
+    const response = { foo: 'bar' };
 
     nock('https://api.cronofy.com', {
       reqheaders: {
-        'Authorization': 'Bearer ' + api.config.access_token,
+        Authorization: 'Bearer ' + api.config.access_token,
         'Content-Type': 'application/json'
       }
     })

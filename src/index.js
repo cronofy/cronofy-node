@@ -1,25 +1,25 @@
 'use strict';
 
-var version = require('../package.json').version;
-var crypto = require('crypto');
+const version = require('../package.json').version;
+const crypto = require('crypto');
 const axios = require('axios').default;
 const qs = require('qs');
 
-var tap = function (func) {
+const tap = function (func) {
   return function (value) {
     func.apply(null, arguments);
     return value;
   };
 };
 
-var cronofy = function (config) {
+const cronofy = function (config) {
   if (!this || this.constructor !== cronofy) {
     throw new Error('Cronofy must be called as a constructor');
   }
 
   this.config = config;
 
-  var dc = config.data_center || config.dataCenter;
+  let dc = config.data_center || config.dataCenter;
 
   if (dc) {
     dc = dc.toLowerCase();
@@ -33,13 +33,13 @@ var cronofy = function (config) {
   };
 };
 
-var omit = function (obj, props) {
-  var keys = Object.keys(obj);
-  var res = {};
+const omit = function (obj, props) {
+  const keys = Object.keys(obj);
+  const res = {};
 
-  for (var i = 0; i < keys.length; i++) {
-    var key = keys[i];
-    var val = obj[key];
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const val = obj[key];
 
     if (!props || props.indexOf(key) === -1) {
       res[key] = val;
@@ -48,15 +48,15 @@ var omit = function (obj, props) {
   return res;
 };
 
-var clone = function (obj) {
+const clone = function (obj) {
   if (!obj || typeof obj !== 'object') {
     return obj;
   }
 
-  var res = obj.constructor();
+  const res = obj.constructor();
 
-  for (var prop in obj) {
-    if (obj.hasOwnProperty(prop)) {
+  for (const prop in obj) {
+    if (Object.hasOwn(obj, prop)) {
       res[prop] = obj[prop];
     }
   }
@@ -73,8 +73,8 @@ cronofy.prototype._httpCall = function (
 ) {
   let data;
   if (method === 'GET') {
-    let qsParams = omit(options, optionsToOmit || ['access_token']);
-    let qsString = qs.stringify(qsParams, { arrayFormat: 'brackets' });
+    const qsParams = omit(options, optionsToOmit || ['access_token']);
+    const qsString = qs.stringify(qsParams, { arrayFormat: 'brackets' });
     if (qsString) {
       path += `?${qsString}`;
     }
@@ -104,7 +104,7 @@ cronofy.prototype._httpCall = function (
       })
       .catch((error) => {
         if (error.response && error.response.status >= 400) {
-          var err = new Error(JSON.stringify(error.response.data));
+          const err = new Error(JSON.stringify(error.response.data));
 
           if (error.response && error.response.status) {
             err.statusCode = error.response.status;
@@ -132,7 +132,7 @@ cronofy.prototype._httpCall = function (
 };
 
 cronofy.prototype._parseArguments = function (args, configDefaults) {
-  var parsed = { options: {}, callback: null };
+  const parsed = { options: {}, callback: null };
 
   if (args.length === 2) {
     parsed.options = clone(args[0]);
@@ -148,8 +148,8 @@ cronofy.prototype._parseArguments = function (args, configDefaults) {
     }
   }
 
-  for (var i = 0; i < configDefaults.length; i++) {
-    var key = configDefaults[i];
+  for (let i = 0; i < configDefaults.length; i++) {
+    const key = configDefaults[i];
 
     parsed.options[key] = parsed.options[key] || this.config[key];
   }
@@ -170,19 +170,19 @@ cronofy.prototype._httpDelete = function (path, options, callback, optionsToOmit
 };
 
 cronofy.prototype.accountInformation = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/account', details.options, details.callback);
 };
 
 cronofy.prototype.addToCalendar = function () {
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret']);
 
   return this._httpPost('/v1/add_to_calendar', details.options, details.callback);
 };
 
 cronofy.prototype.realTimeScheduling = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
 
   details.options.bearer_token = details.options.client_secret;
 
@@ -190,37 +190,37 @@ cronofy.prototype.realTimeScheduling = function () {
 };
 
 cronofy.prototype.realTimeSequencing = function () {
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret']);
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret']);
 
   return this._httpPost('/v1/real_time_sequencing', details.options, details.callback);
 };
 
 cronofy.prototype.authorizeWithServiceAccount = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/service_account_authorizations', details.options, details.callback);
 };
 
 cronofy.prototype.availability = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/availability', details.options, details.callback);
 };
 
 cronofy.prototype.sequencedAvailability = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/sequenced_availability', details.options, details.callback);
 };
 
 cronofy.prototype.upsertAvailablePeriod = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/available_periods', details.options, details.callback);
 };
 
 cronofy.prototype.listAvailablePeriods = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   if (details.options.next_page) {
     return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
@@ -230,87 +230,87 @@ cronofy.prototype.listAvailablePeriods = function () {
 };
 
 cronofy.prototype.deleteAvailablePeriods = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/available_periods', details.options, details.callback);
 };
 
 cronofy.prototype.listAvailabilityRules = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/availability_rules', details.options, details.callback);
 };
 
 cronofy.prototype.upsertAvailabilityRule = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/availability_rules', details.options, details.callback);
 };
 
 cronofy.prototype.readAvailabilityRule = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
-  var availabilityRuleId = details.options.availability_rule_id;
+  const availabilityRuleId = details.options.availability_rule_id;
   delete details.options.availability_rule_id;
   return this._httpGet('/v1/availability_rules/' + availabilityRuleId, details.options, details.callback);
 };
 
 cronofy.prototype.deleteAvailabilityRule = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/availability_rules/' + details.options.availability_rule_id, details.options, details.callback);
 };
 
 cronofy.prototype.createEvent = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
 };
 
 cronofy.prototype.createNotificationChannel = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/channels', details.options, details.callback);
 };
 
 cronofy.prototype.deleteEvent = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
 };
 
 cronofy.prototype.bulkDeleteEvents = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/events', details.options, details.callback, ['access_token']);
 };
 
 cronofy.prototype.updateExternalEvent = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
 };
 
 cronofy.prototype.deleteExternalEvent = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/calendars/' + details.options.calendar_id + '/events', details.options, details.callback, ['access_token', 'calendar_id']);
 };
 
 cronofy.prototype.deleteNotificationChannel = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpDelete('/v1/channels/' + details.options.channel_id, details.options, details.callback, ['access_token', 'channel_id']);
 };
 
 cronofy.prototype.elevatedPermissions = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/permissions', details.options, details.callback);
 };
 
 cronofy.prototype.freeBusy = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   if (details.options.next_page) {
     return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
@@ -320,31 +320,31 @@ cronofy.prototype.freeBusy = function () {
 };
 
 cronofy.prototype.listCalendars = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/calendars', details.options, details.callback);
 };
 
 cronofy.prototype.createCalendar = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/calendars', details.options, details.callback);
 };
 
 cronofy.prototype.listNotificationChannels = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/channels', details.options, details.callback);
 };
 
 cronofy.prototype.profileInformation = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/profiles', details.options, details.callback);
 };
 
 cronofy.prototype.readEvents = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   if (details.options.next_page) {
     return this._httpCall('GET', details.options.next_page, details.options, details.callback, ['access_token', 'next_page']);
@@ -354,8 +354,8 @@ cronofy.prototype.readEvents = function () {
 };
 
 cronofy.prototype.applicationCalendar = function () {
-  var that = this;
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'application_calendar_id']);
+  const that = this;
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret', 'application_calendar_id']);
 
   return this._httpPost('/v1/application_calendars', details.options).then(tap(function (response) {
     that.config.access_token = response.access_token;
@@ -368,14 +368,14 @@ cronofy.prototype.applicationCalendar = function () {
 };
 
 cronofy.prototype.revokeProfileAuthorization = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpPost('/v1/profiles/' + details.options.profile_id + '/revoke', details.options, details.callback);
 };
 
 cronofy.prototype.refreshAccessToken = function () {
-  var that = this;
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
+  const that = this;
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
 
   details.options.grant_type = 'refresh_token';
 
@@ -390,18 +390,18 @@ cronofy.prototype.refreshAccessToken = function () {
 };
 
 cronofy.prototype.hmacValid = function () {
-  var details = this._parseArguments(arguments, ['hmac', 'body', 'client_secret']);
+  const details = this._parseArguments(arguments, ['hmac', 'body', 'client_secret']);
   if (!details.options.hmac || details.options.hmac.length === 0) return false;
 
-  var calculated = crypto.createHmac('sha256', details.options.client_secret).update(details.options.body).digest('base64');
-  var hmacList = details.options.hmac.split(',');
+  const calculated = crypto.createHmac('sha256', details.options.client_secret).update(details.options.body).digest('base64');
+  const hmacList = details.options.hmac.split(',');
 
   return hmacList.includes(calculated);
 };
 
 cronofy.prototype.requestAccessToken = function () {
-  var that = this;
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
+  const that = this;
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
 
   details.options.grant_type = 'authorization_code';
 
@@ -416,8 +416,8 @@ cronofy.prototype.requestAccessToken = function () {
 };
 
 cronofy.prototype.revokeAuthorization = function () {
-  var that = this;
-  var details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
+  const that = this;
+  const details = this._parseArguments(arguments, ['client_id', 'client_secret', 'refresh_token']);
 
   return this._httpPost('/oauth/token/revoke', details.options).then(tap(function () {
     delete that.config.access_token;
@@ -430,7 +430,7 @@ cronofy.prototype.revokeAuthorization = function () {
 };
 
 cronofy.prototype.getSmartInvite = function () {
-  var details = this._parseArguments(arguments, ['smart_invite_id', 'recipient_email', 'client_secret']);
+  const details = this._parseArguments(arguments, ['smart_invite_id', 'recipient_email', 'client_secret']);
 
   details.options.bearer_token = details.options.client_secret;
 
@@ -438,7 +438,7 @@ cronofy.prototype.getSmartInvite = function () {
 };
 
 cronofy.prototype.createSmartInvite = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
 
   details.options.bearer_token = details.options.client_secret;
 
@@ -446,7 +446,7 @@ cronofy.prototype.createSmartInvite = function () {
 };
 
 cronofy.prototype.cancelSmartInvite = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
 
   details.options.bearer_token = details.options.client_secret;
   details.options.method = 'cancel';
@@ -455,13 +455,13 @@ cronofy.prototype.cancelSmartInvite = function () {
 };
 
 cronofy.prototype.userInfo = function () {
-  var details = this._parseArguments(arguments, ['access_token']);
+  const details = this._parseArguments(arguments, ['access_token']);
 
   return this._httpGet('/v1/userinfo', details.options, details.callback);
 };
 
 cronofy.prototype.requestElementToken = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
 
   details.options.bearer_token = details.options.client_secret;
 
@@ -495,14 +495,14 @@ cronofy.prototype.conferencingServiceAuthorizations = function () {
 };
 
 cronofy.prototype.createBookableEvent = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
   details.options.bearer_token = details.options.client_secret;
 
   return this._httpPost('/v1/bookable_events', details.options, details.callback, ['client_secret']);
 };
 
 cronofy.prototype.readBookableEvents = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
   details.options.bearer_token = details.options.client_secret;
 
   return this._httpGet(
@@ -514,7 +514,7 @@ cronofy.prototype.readBookableEvents = function () {
 };
 
 cronofy.prototype.upsertRegistrationBookableEvent = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
   details.options.bearer_token = details.options.client_secret;
 
   return this._httpPost(
@@ -526,7 +526,7 @@ cronofy.prototype.upsertRegistrationBookableEvent = function () {
 };
 
 cronofy.prototype.deleteRegistrationBookableEvent = function () {
-  var details = this._parseArguments(arguments, ['client_secret']);
+  const details = this._parseArguments(arguments, ['client_secret']);
   details.options.bearer_token = details.options.client_secret;
 
   return this._httpDelete(

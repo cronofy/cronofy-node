@@ -4,19 +4,19 @@ CURRENT_VERSION:=$(shell jq ".version" -r package.json)
 all: install
 
 .PHONY: ci
-ci: install
-	npm ci
+ci: 
+	yarn install --frozen-lockfile --silent --prefer-offline --no-progress
 
 .PHONY: init
 init: install
 
 .PHONY: install
 install:
-	npm install
+	yarn install
 
 .PHONY: test
 test:
-	npm test
+	yarn test
 
 .PHONY: check_dependencies
 check_dependencies:

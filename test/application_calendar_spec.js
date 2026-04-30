@@ -1,8 +1,8 @@
-var expect = require('chai').expect;
-var nock = require('nock');
-var Cronofy = require('../src/index');
+const expect = require('chai').expect;
+const nock = require('nock');
+const Cronofy = require('../src/index');
 
-var api = new Cronofy({
+const api = new Cronofy({
   client_id: 'armzr1h5NPQST93XTFL9iIULXxfdDlmV',
   client_secret: 'aPPwd-ASDFAsdfasdfasdfsadfasdfASDFSADF_asdfasdfasdf',
   access_token: 'aLUj9bRInSj1n08pHPAo5ru0OOppDaCO',
@@ -11,18 +11,18 @@ var api = new Cronofy({
 
 describe('obtaining application calendar tokens', function () {
   it('returns new token information', function (done) {
-    var applicationCalendarId = '12312312nakjsdnasd';
+    const applicationCalendarId = '12312312nakjsdnasd';
 
-    var response = {
-      'access_token': '0000-8iQY7N8CkeO_000000000',
-      'token_type': 'bearer',
-      'expires_in': 1800,
-      'refresh_token': '0000000000000000-zHFvHoMDWYOS',
-      'scope': 'read_write',
-      'application_calendar_id': 'apc_5a5f2cbee0cf2442bb000008',
-      'linking_profile': {
-        'provider_name': 'cronofy',
-        'profile_id': 'pro_5a5f2cbee0cf2442bb000001'
+    const response = {
+      access_token: '0000-8iQY7N8CkeO_000000000',
+      token_type: 'bearer',
+      expires_in: 1800,
+      refresh_token: '0000000000000000-zHFvHoMDWYOS',
+      scope: 'read_write',
+      application_calendar_id: 'apc_5a5f2cbee0cf2442bb000008',
+      linking_profile: {
+        provider_name: 'cronofy',
+        profile_id: 'pro_5a5f2cbee0cf2442bb000001'
       }
     };
 
