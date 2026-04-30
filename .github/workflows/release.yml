@@ -7,6 +7,10 @@ on:
         description: 'Git tag to publish a release for (eg. v0.0.0)'
         required: true
 
+permissions:
+  id-token: write  # Required for OIDC
+  contents: read
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -20,6 +24,7 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
+      # Required to resolve an issue with publishing provenance
       - name: Update npm
         run: npm install -g npm@latest
 
@@ -28,6 +33,5 @@ jobs:
           make ci
           echo ""
           echo "Publishing"
-          npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          npm publish --no-provenance
+        # Note: Do NOT set NODE_AUTH_TOKEN!
