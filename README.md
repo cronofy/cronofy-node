@@ -55,9 +55,28 @@ Takes an optional callback, either returning a promise for, or calling the provi
  - **code** - required - The short-lived, single-use code issued to you when the user authorized your access to their account as part of an Authorization Request.
  - **redirect_uri** - required - The same HTTP or HTTPS URI you passed when requesting the user's authorization.
 
-### revokeAuthorization(callback)
+### revokeAuthorization(options, callback)
 
-Takes an optional callback, either returning a promise for, or calling the provided callback with an empty object in the success case.
+Revokes the authorization identified by `options.token` or `options.sub`.
+Returns a promise, or calls the optional callback without arguments on success.
+After a successful response, the client clears its stored access and refresh tokens.
+
+#### Options object
+
+- `token`: A refresh token (recommended) or access token for the authorization to revoke. Required unless `sub` is provided.
+- `sub`: The account's `sub` value. Required unless `token` is provided. If both are supplied, `token` takes priority.
+- `client_id`: Your OAuth client ID. Required unless set on the client.
+- `client_secret`: Your OAuth client secret. Required unless set on the client.
+
+Configured `access_token` and `refresh_token` values do not supply `options.token`. Pass the token explicitly:
+
+```javascript
+cronofyClient.revokeAuthorization({
+  token: process.env.CRONOFY_REFRESH_TOKEN
+});
+```
+
+See the [Revoking Authorization documentation](https://docs.cronofy.com/developers/api/authorization/revoke/) for the API contract.
 
 ### elevatedPermissions(options, callback)
 
