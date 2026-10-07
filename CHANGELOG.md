@@ -1,3 +1,7 @@
+# [v3.8.5]
+
+* Document `revokeAuthorization` options and behaviour [#116] - thanks @bensynapse!
+
 # [v3.8.4]
 
 * Bump axios dependency to version 1.12.0 #[107]
@@ -45,6 +49,7 @@
 * Update dev dependencies and CI
 
 
+[v3.8.5]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.5
 [v3.8.2]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.3
 [v3.8.2]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.2
 [v3.8.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.8.1
@@ -56,6 +61,7 @@
 [v3.5.1]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.1
 [v3.5.0]: https://github.com/cronofy/cronofy-node/releases/tag/v3.5.0
 
+[#116]: https://github.com/cronofy/cronofy-node/pull/116
 [#106]: https://github.com/cronofy/cronofy-node/pull/106
 [#98]: https://github.com/cronofy/cronofy-node/pull/98
 [#97]: https://github.com/cronofy/cronofy-node/pull/97
